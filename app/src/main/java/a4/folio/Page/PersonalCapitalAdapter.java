@@ -2,6 +2,7 @@ package a4.folio.Page;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,14 +18,14 @@ import a4.folio.DataType.Stock;
  * Created by amir on 5/28/2018.
  */
 
-public class PersonalCapitalAdapter extends BaseAdapter {
-    private Context context;
+class PersonalCapitalAdapter extends BaseAdapter {
     private ArrayList<Stock> stocks;
     private LayoutInflater layoutInflater;
     private boolean pos;
+    private Typeface typeface;
 
     PersonalCapitalAdapter(Context context, ArrayList<Stock> stocks, boolean isPositive) {
-        this.context = context;
+        typeface = Typeface.createFromAsset(context.getAssets(), "BTitr.ttf");
         this.stocks = stocks;
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         pos = isPositive;
@@ -55,6 +56,13 @@ public class PersonalCapitalAdapter extends BaseAdapter {
         TextView ghey = (TextView) view.findViewById(R.id.personal_capital_cell_gheymat);
         TextView tagh = (TextView) view.findViewById(R.id.personal_capital_cell_taghir);
         TextView darsad = (TextView) view.findViewById(R.id.personal_capital_cell_darsad);
+
+        namad.setTypeface(typeface);
+        mojoodi.setTypeface(typeface);
+        ghey.setTypeface(typeface);
+        tagh.setTypeface(typeface);
+        darsad.setTypeface(typeface);
+
 
         namad.setText(stocks.get(position).getNamad());
         mojoodi.setText(String.valueOf(stocks.get(position).getMojoodi()));

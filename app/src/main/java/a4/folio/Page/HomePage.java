@@ -1,6 +1,7 @@
 package a4.folio.Page;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -26,13 +27,14 @@ public class HomePage extends AppCompatActivity {
     ListView positiveList, negativeList;
     ConnectionManager connectionManager;
     HomePageInfo homePageInfo;
+    Typeface typeface ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
         Toast.makeText(this, "در حال دریافت اطلاعات \n صبر کنید ...", Toast.LENGTH_SHORT).show();
-
+        typeface = Typeface.createFromAsset(getApplicationContext().getAssets(), "BTitr.ttf");
         allMoney = (TextView) findViewById(R.id.textView_homePage_AllMoney);
         cashMoney = (TextView) findViewById(R.id.textView_homePage_Cash);
         stocksValue = (TextView) findViewById(R.id.textView_homePage_stocksValue);
@@ -41,6 +43,11 @@ public class HomePage extends AppCompatActivity {
         goToStockListPage = (Button) findViewById(R.id.Button_homePage_goToStockListPage);
         positiveList = (ListView) findViewById(R.id.listView_homePage_positive_stocks);
         negativeList = (ListView) findViewById(R.id.listView_homePage_negative_stocks);
+        allMoney.setTypeface(typeface);
+        cashMoney.setTypeface(typeface);
+        stocksValue.setTypeface(typeface);
+        allProfit.setTypeface(typeface);
+        yesterdayProfit.setTypeface(typeface);
         goToStockListPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,6 +77,7 @@ public class HomePage extends AppCompatActivity {
         stocksValue.setText(String.valueOf(homePageInfo.getStocksValue()));
         allProfit.setText(String.valueOf(homePageInfo.getAllProfit()));
         yesterdayProfit.setText(String.valueOf(homePageInfo.getYesterdayProfit()));
+
         // need to complete listviews
         final HomePageInfo finalHomePageInfo = homePageInfo;
         runOnUiThread(new Runnable() {
