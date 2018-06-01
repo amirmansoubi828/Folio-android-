@@ -25,7 +25,7 @@ public class ConnectionManager {
     private List<PersonalCapital> personalCapitalList;
     private List<News> bourseNews;
     static String username = "ali";
-    private boolean isDonePersonalInfo, isDonePersonalCapital, isDoneBourseInformation, answer, isDoneChangeAmount, isDoneBourseNews; 
+    private boolean isDonePersonalInfo, isDonePersonalCapital, isDoneBourseInformation, answer, isDoneChangeAmount, isDoneBourseNews;
     public ConnectionManager() {
         folioClient = RetrofitManager.createService(FolioClient.class);
     }
