@@ -33,7 +33,7 @@ public class HomePage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
-        Toast.makeText(this, "در حال دریافت اطلاعات \n صبر کنید ...", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.wait_for_response, Toast.LENGTH_SHORT).show();
         typeface = Typeface.createFromAsset(getApplicationContext().getAssets(), "BTitr.ttf");
         allMoney = (TextView) findViewById(R.id.textView_homePage_AllMoney);
         cashMoney = (TextView) findViewById(R.id.textView_homePage_Cash);

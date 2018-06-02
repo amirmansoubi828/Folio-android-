@@ -23,8 +23,8 @@ public class ConnectionManager {
     private PersonalInfo personalInfo;
     private List<Stock> bourseInformation;
     private List<PersonalCapital> personalCapitalList;
-    private List<News> bourseNews;
-    static String username = "ali";
+    private ArrayList<News> bourseNews;
+    static String username = "ali";  //will be changed after Login feature
     private boolean isDonePersonalInfo, isDonePersonalCapital, isDoneBourseInformation, answer, isDoneChangeAmount, isDoneBourseNews;
     public ConnectionManager() {
         folioClient = RetrofitManager.createService(FolioClient.class);
@@ -114,7 +114,7 @@ public class ConnectionManager {
         return answer;
     }
 
-    public List<News> getBourseNews() throws Exception {
+    public ArrayList<News> getBourseNews() throws Exception {
         getBNewsAPI();
         while (!isDoneBourseNews) {
             synchronized (this) {
@@ -206,7 +206,7 @@ public class ConnectionManager {
         bourseNewsCall.enqueue(new Callback<List<News>>() {
             @Override
             public void onResponse(Call<List<News>> call, Response<List<News>> response) {
-                bourseNews = response.body();
+                bourseNews = new ArrayList<News>(response.body());
                 isDoneBourseNews = true;
             }
 
