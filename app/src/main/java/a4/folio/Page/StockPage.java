@@ -18,9 +18,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import a4.folio.ConnectionManager;
+import a4.folio.DataType.Stock;
 import a4.folio.PageInfo.StockPageInfo;
 import a4.folio.R;
-import a4.folio.DataType.Stock;
 
 /**
  * Created by amir on 5/27/2018.
@@ -32,7 +32,8 @@ public class StockPage extends AppCompatActivity {
     TextView gheymatKharid, gheymatForoush, cashMoney;
     Button kharid, forush;
     int buyPrice, sellPrice;
-    Typeface typeface ;
+    Typeface typeface;
+    ConnectionManager connectionManager;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -120,7 +121,6 @@ public class StockPage extends AppCompatActivity {
         yesterday.setTypeface(typeface);
 
 
-
         int maxV = Integer.parseInt(String.valueOf(stock.getMax_V()).replaceAll(",", ""));
         int minV = Integer.parseInt(String.valueOf(stock.getMin_V()).replaceAll(",", ""));
         int diff = (maxV - minV) / 4;
@@ -190,19 +190,20 @@ public class StockPage extends AppCompatActivity {
 
     private void sell() {
         final int numberOfSell = Integer.valueOf(String.valueOf(tedadForoush.getText()));
-        final int oldAmount  = Integer.valueOf(String.valueOf(mojoodi.getText()));
+        final int oldAmount = Integer.valueOf(String.valueOf(mojoodi.getText()));
         final Double cash = Double.valueOf(String.valueOf(cashMoney.getText()));
         if (numberOfSell <= oldAmount) {
             Toast.makeText(this, "صبر کنید ...", Toast.LENGTH_SHORT).show();
             Thread thread = new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    ConnectionManager c = new ConnectionManager();
-                    if (c.trade(String.valueOf(namad.getText()), oldAmount - numberOfSell, (int) (cash + (numberOfSell * sellPrice)))) {
+                    connectionManager = new ConnectionManager();
+                    if (connectionManager.trade(String.valueOf(namad.getText()), oldAmount - numberOfSell, (int) (cash + (numberOfSell * sellPrice)))) {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                cashMoney.setText(String.valueOf(cash + (numberOfSell * sellPrice)));
+                                StockListPage.cashMoney = (int) (cash + (numberOfSell * sellPrice));
+                                cashMoney.setText(String.valueOf(StockListPage.cashMoney));
                                 mojoodi.setText(String.valueOf(oldAmount - numberOfSell));
                             }
                         });
@@ -226,15 +227,17 @@ public class StockPage extends AppCompatActivity {
             Thread thread = new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    ConnectionManager c = new ConnectionManager();
-                    if(c.trade(String.valueOf(namad.getText()), oldAmount + numberOfBuy, (int) (cash - (numberOfBuy * buyPrice)))){
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            cashMoney.setText(String.valueOf(cash - (numberOfBuy * buyPrice)));
-                            mojoodi.setText(String.valueOf(oldAmount + numberOfBuy));
-                        }
-                    });}//else...
+                    connectionManager = new ConnectionManager();
+                    if (connectionManager.trade(String.valueOf(namad.getText()), oldAmount + numberOfBuy, (int) (cash - (numberOfBuy * buyPrice)))) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                StockListPage.cashMoney = (int) (cash - (numberOfBuy * buyPrice));
+                                cashMoney.setText(String.valueOf(StockListPage.cashMoney));
+                                mojoodi.setText(String.valueOf(oldAmount + numberOfBuy));
+                            }
+                        });
+                    }//else...
                 }
             });
             ExecutorService executorService = Executors.newFixedThreadPool(1);

@@ -1,5 +1,6 @@
 package a4.folio.Page;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -19,9 +20,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import a4.folio.ConnectionManager;
+import a4.folio.DataType.Stock;
 import a4.folio.PageInfo.StockPageInfo;
 import a4.folio.R;
-import a4.folio.DataType.Stock;
 
 /**
  * Created by amir on 5/26/2018.
@@ -30,16 +31,24 @@ import a4.folio.DataType.Stock;
 public class StockListPage extends AppCompatActivity {
     LinearLayout nameKamel, mojoodi, name, hajm, arzesh, dafmoa, bish, kam, meghpa, taghpa, darpa, meghakh, taghakh, darakh, rooz, tasir, pe, eps, beharz, behtagh;
     int turn = 1;
-    Typeface typeface;
-    int cashMoney, allMoney;
+    Typeface typefaceBTitr;
+    static int cashMoney, allMoney;
     HorizontalScrollView scrollView;
+    ProgressDialog dialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.stock_list_page);
-        Toast.makeText(this, "در حال دریافت اطلاعات \n صبر کنید ...", Toast.LENGTH_SHORT).show();
-        typeface = Typeface.createFromAsset(getApplicationContext().getAssets(), "BTitr.ttf");
+
+        dialog = new ProgressDialog(this); // this = YourActivity
+        dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        dialog.setMessage("در حال دریافت اطلاعات\nصبر کنید ...");
+        dialog.setIndeterminate(true);
+        dialog.setCanceledOnTouchOutside(false);
+
+        Toast.makeText(this, R.string.wait, Toast.LENGTH_SHORT).show();
+        typefaceBTitr = Typeface.createFromAsset(getApplicationContext().getAssets(), "BTitr.ttf");
         mojoodi = (LinearLayout) findViewById(R.id.mojoodi_layout);
         //stockListPage = (LinearLayout) findViewById(R.id.stockListPage_linearLayout);
         name = (LinearLayout) findViewById(R.id.name_layout);
@@ -76,12 +85,13 @@ public class StockListPage extends AppCompatActivity {
     }
 
     private void refresh() {
-       /* runOnUiThread(new Runnable() {
+        runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                stockListPage.setVisibility(View.INVISIBLE);
+                dialog.show();
             }
-        });*/
+        });
+
         ConnectionManager connectionManager = new ConnectionManager();
         try {
             List<Stock> bourseInformation = connectionManager.getBourseInformation();
@@ -97,7 +107,6 @@ public class StockListPage extends AppCompatActivity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                   // stockListPage.setVisibility(View.VISIBLE);
                     scrollView.fullScroll(View.FOCUS_RIGHT);
                 }
             });
@@ -105,6 +114,12 @@ public class StockListPage extends AppCompatActivity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                dialog.dismiss();
+            }
+        });
     }
 
     private void addStockToList(final Stock stock) {
@@ -163,7 +178,7 @@ public class StockListPage extends AppCompatActivity {
         textView.setText(sText);
         textView.setGravity(Gravity.CENTER);
         textView.setTextColor(textColor);
-        textView.setTypeface(typeface);
+        textView.setTypeface(typefaceBTitr);
         if (turn == -1) {
             textView.setBackgroundColor(getResources().getColor(R.color.font2));
         }
@@ -178,4 +193,6 @@ public class StockListPage extends AppCompatActivity {
             return Color.GREEN;
         }
     }
+
+
 }

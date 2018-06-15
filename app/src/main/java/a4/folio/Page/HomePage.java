@@ -11,43 +11,66 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.IOException;
+import java.net.ProtocolException;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import a4.folio.ConnectionManager;
+import a4.folio.DataType.Stock;
 import a4.folio.PageInfo.HomePageInfo;
 import a4.folio.PageInfo.StockPageInfo;
 import a4.folio.R;
-import a4.folio.DataType.Stock;
 
 public class HomePage extends AppCompatActivity {
     TextView allMoney, cashMoney, stocksValue, allProfit, yesterdayProfit;
+    TextView allMoneyPersian, cashMoneyPersian, stocksValuePersian, allProfitPersian, yesterdayProfitPersian, positivePersian, negativePersian;
     Button goToStockListPage;
     ListView positiveList, negativeList;
     ConnectionManager connectionManager;
     HomePageInfo homePageInfo;
-    Typeface typeface ;
+    Typeface typefaceBtitr, typefaceBnazanin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
         Toast.makeText(this, R.string.wait_for_response, Toast.LENGTH_SHORT).show();
-        typeface = Typeface.createFromAsset(getApplicationContext().getAssets(), "BTitr.ttf");
+
+        typefaceBtitr = Typeface.createFromAsset(getApplicationContext().getAssets(), "BTitr.ttf");
+        typefaceBnazanin = Typeface.createFromAsset(getApplicationContext().getAssets(), "BNaznnBd.ttf");
+
         allMoney = (TextView) findViewById(R.id.textView_homePage_AllMoney);
         cashMoney = (TextView) findViewById(R.id.textView_homePage_Cash);
         stocksValue = (TextView) findViewById(R.id.textView_homePage_stocksValue);
         allProfit = (TextView) findViewById(R.id.textView_homePage_AllProfitPercent);
         yesterdayProfit = (TextView) findViewById(R.id.textView_homePage_YesterdayPercent);
+
+        allMoneyPersian = (TextView) findViewById(R.id.textView_homePage_kole_daraei);
+        cashMoneyPersian = (TextView) findViewById(R.id.textView_homePage_pool_naghd);
+        stocksValuePersian = (TextView) findViewById(R.id.textView_homePage_majmoo);
+        allProfitPersian = (TextView) findViewById(R.id.textView_homePage_soode_kol);
+        yesterdayProfitPersian = (TextView) findViewById(R.id.textView_homePage_sood_dirooz);
+        positivePersian = (TextView) findViewById(R.id.textView_homePage_mosbat);
+        negativePersian = (TextView) findViewById(R.id.textView_homePage_manfi);
+
+        allMoneyPersian.setTypeface(typefaceBnazanin);
+        cashMoneyPersian.setTypeface(typefaceBnazanin);
+        stocksValuePersian.setTypeface(typefaceBnazanin);
+        allProfitPersian.setTypeface(typefaceBnazanin);
+        yesterdayProfitPersian.setTypeface(typefaceBnazanin);
+        positivePersian.setTypeface(typefaceBnazanin);
+        negativePersian.setTypeface(typefaceBnazanin);
+
         goToStockListPage = (Button) findViewById(R.id.Button_homePage_goToStockListPage);
         positiveList = (ListView) findViewById(R.id.listView_homePage_positive_stocks);
         negativeList = (ListView) findViewById(R.id.listView_homePage_negative_stocks);
-        allMoney.setTypeface(typeface);
-        cashMoney.setTypeface(typeface);
-        stocksValue.setTypeface(typeface);
-        allProfit.setTypeface(typeface);
-        yesterdayProfit.setTypeface(typeface);
+        allMoney.setTypeface(typefaceBtitr);
+        cashMoney.setTypeface(typefaceBtitr);
+        stocksValue.setTypeface(typefaceBtitr);
+        allProfit.setTypeface(typefaceBtitr);
+        yesterdayProfit.setTypeface(typefaceBtitr);
         goToStockListPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,8 +79,9 @@ public class HomePage extends AppCompatActivity {
                     intent.putExtra("allMoney", Integer.valueOf(String.valueOf(allMoney.getText())));
                     intent.putExtra("cashMoney", Integer.valueOf(String.valueOf(cashMoney.getText())));
                     startActivity(intent);
-                } catch (Exception e) {
+                } catch (NumberFormatException e) {
                     e.printStackTrace();
+                    Toast.makeText(HomePage.this, R.string.wait_for_complete, Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -72,17 +96,19 @@ public class HomePage extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        allMoney.setText(String.valueOf(homePageInfo.getAllMoney()));
-        cashMoney.setText(String.valueOf(homePageInfo.getCashMoney()));
-        stocksValue.setText(String.valueOf(homePageInfo.getStocksValue()));
-        allProfit.setText(String.valueOf(homePageInfo.getAllProfit()));
-        yesterdayProfit.setText(String.valueOf(homePageInfo.getYesterdayProfit()));
+
 
         // need to complete listviews
         final HomePageInfo finalHomePageInfo = homePageInfo;
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                allMoney.setText(String.valueOf(homePageInfo.getAllMoney()));
+                cashMoney.setText(String.valueOf(homePageInfo.getCashMoney()));
+                stocksValue.setText(String.valueOf(homePageInfo.getStocksValue()));
+                allProfit.setText(String.valueOf(homePageInfo.getAllProfit()));
+                yesterdayProfit.setText(String.valueOf(homePageInfo.getYesterdayProfit()));
+
                 calculateStocksValue(finalHomePageInfo.getPositives(), finalHomePageInfo.getNegatives());
                 stocksValue.setText(String.valueOf(homePageInfo.getStocksValue()));
                 allMoney.setText(String.valueOf(homePageInfo.getAllMoney()));
@@ -127,7 +153,22 @@ public class HomePage extends AppCompatActivity {
             public void run() {
                 try {
                     refresh();
-                } catch (Exception e) {
+                }catch (ProtocolException e){
+                    e.printStackTrace();
+                    System.out.println("trying again");
+                    try {
+                        refresh();
+                    } catch (Exception e1) {
+                        e1.printStackTrace();
+                    }
+                }catch (IOException ioe){
+                    try {
+                        System.out.println("trying again");
+                        refresh();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }catch (Exception e) {
                     e.printStackTrace();
                 }
             }

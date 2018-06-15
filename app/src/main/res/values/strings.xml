@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Folio</string>
     <string name="wait_for_response">در حال دریافت اطلاعات   صبر کنید ...</string>
+    <string name="wait">در حال دریافت اطلاعات   صبر کنید ...</string>
+    <string name="wait_for_complete">لطفا تا کامل شدن این صفحه صبر کنید.</string>
+    <string name="connection_err">لطفا اتصال خود را بررسی کنید.</string>
 </resources>

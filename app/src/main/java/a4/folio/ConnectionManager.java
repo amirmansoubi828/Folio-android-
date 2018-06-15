@@ -26,6 +26,7 @@ public class ConnectionManager {
     private ArrayList<News> bourseNews;
     static String username = "ali";  //will be changed after Login feature
     private boolean isDonePersonalInfo, isDonePersonalCapital, isDoneBourseInformation, answer, isDoneChangeAmount, isDoneBourseNews;
+
     public ConnectionManager() {
         folioClient = RetrofitManager.createService(FolioClient.class);
     }
@@ -36,20 +37,21 @@ public class ConnectionManager {
 
         getPInfoAPI();
 
-        while (!isDonePersonalInfo) {
+        while (!isDonePersonalInfo || personalInfo == null) {
             synchronized (this) {
                 System.out.println("Waiting for personal info");
-                wait(1);
+                wait(100);
             }
         }
         getPCapitalAPI();
-        while (!isDonePersonalCapital) {
+        while (!isDonePersonalCapital || personalCapitalList == null) {
             synchronized (this) {
                 System.out.println("Waiting for personal capital");
-                wait(1);
+                wait(100);
             }
         }
-        homePageInfo.setCashMoney((int) personalInfo.getMoney());
+        homePageInfo.setCashMoney(personalInfo.getMoney());
+
         ArrayList<Stock> posi = new ArrayList<>();
         ArrayList<Stock> nega = new ArrayList<>();
         for (int i = 0; i < personalCapitalList.size(); i++) {
@@ -74,18 +76,18 @@ public class ConnectionManager {
 
     public List<Stock> getBourseInformation() throws InterruptedException {
         getBInfoAPI();
-        while (!isDoneBourseInformation) {
+        while (!isDoneBourseInformation || bourseInformation == null) {
             synchronized (this) {
                 System.out.println("Waiting for bourse info");
-                wait(1);
+                wait(100);
             }
         }
 
         getPCapitalAPI();
-        while (!isDonePersonalCapital) {
+        while (!isDonePersonalCapital || personalCapitalList == null) {
             synchronized (this) {
                 System.out.println("Waiting for personal capital");
-                wait(1);
+                wait(100);
             }
         }
         for (int i = 0; i < personalCapitalList.size(); i++) {
@@ -105,7 +107,7 @@ public class ConnectionManager {
         while (!isDoneChangeAmount) {
             synchronized (this) {
                 try {
-                    wait(1);
+                    wait(100);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -119,7 +121,7 @@ public class ConnectionManager {
         while (!isDoneBourseNews) {
             synchronized (this) {
                 System.out.println("Waiting for bourse news");
-                wait(1);
+                wait(100);
             }
         }
         return bourseNews;
@@ -153,6 +155,7 @@ public class ConnectionManager {
             public void onResponse(Call<PersonalInfo> call, Response<PersonalInfo> response) {
                 personalInfo = response.body();
                 isDonePersonalInfo = true;
+
             }
 
             @Override
