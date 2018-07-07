@@ -181,21 +181,6 @@ public class StockListPage extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Toast.makeText(this, "resu ", Toast.LENGTH_SHORT).show();
-    }
     
-    @Override
-    protected void onPostResume() {
-        super.onPostResume();
-        Toast.makeText(this, "presu", Toast.LENGTH_SHORT).show();
-    }
 
-    @Override
-    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        Toast.makeText(this, "pcrea", Toast.LENGTH_SHORT).show();
-    }
 }
