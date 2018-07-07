@@ -140,6 +140,7 @@
             android:layout_weight="1"
             android:fontFamily="monospace"
             android:gravity="center"
+            android:paddingRight="10dp"
             android:text="سود نسبت به دیروز"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="18sp" />
@@ -184,7 +185,9 @@
             android:layout_marginTop="6dp"
             android:layout_weight="1"
             android:background="@color/mainBackground"
-            android:text="اخبار"
+            android:drawableLeft="@mipmap/news"
+            android:padding="5dp"
+            android:text="اخبار بورس"
             android:textColor="@color/secondBackground"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -199,7 +202,9 @@
             android:layout_marginTop="6dp"
             android:layout_weight="1"
             android:background="@color/mainBackground"
-            android:text="مشاهده تمام سهام بازار"
+            android:drawableRight="@mipmap/table"
+            android:padding="5dp"
+            android:text="لیست سهام"
             android:textColor="@color/secondBackground"
             android:textSize="18sp"
             android:textStyle="bold" />

@@ -68,7 +68,7 @@ class PersonalCapitalAdapter extends BaseAdapter {
         mojoodi.setText(String.valueOf(stocks.get(position).getMojoodi()));
         ghey.setText(stocks.get(position).getLastest_Amount());
         tagh.setText(stocks.get(position).getLastest_Change());
-        darsad.setText("(" + stocks.get(position).getLastest_Percentage() + "%)");
+        darsad.setText(stocks.get(position).getLastest_Percentage() + "%");
 
         if (pos) {
             ghey.setTextColor(Color.GREEN);

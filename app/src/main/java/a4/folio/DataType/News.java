@@ -1,10 +1,12 @@
 package a4.folio.DataType;
 
+import java.io.Serializable;
+
 /**
  * Created by amir on 6/1/2018.
  */
 
-public class News {
+public class News implements Serializable {
     private String title , news_date , news_Quote , news_Body ;
     int day , month , year ;
 
