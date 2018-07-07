@@ -2,10 +2,27 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/secondBackground">
+    android:background="@color/secondBackground"
+    android:orientation="vertical"
+    android:weightSum="10">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@color/colorPrimaryDark"
+        android:paddingBottom="5dp"
+        android:text="اخبار"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="@color/secondBackground"
+        android:textSize="24sp" />
 
     <ListView
         android:id="@+id/listView_newsListPage"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_weight="9"
+        android:divider="@color/colorPrimaryDark"
+        android:dividerHeight="1dp" />
 </LinearLayout>

@@ -6,10 +6,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import a4.folio.ConnectionManager;
 import a4.folio.DataType.News;
+import a4.folio.Listeners.NewsDataListener;
 import a4.folio.R;
 
 /**
@@ -18,7 +19,7 @@ import a4.folio.R;
 
 public class NewsListPage extends AppCompatActivity {
     ListView listView;
-    ArrayList<News> newsList;
+    List<News> newsList;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -26,23 +27,18 @@ public class NewsListPage extends AppCompatActivity {
         setContentView(R.layout.news_list_page);
         listView = (ListView) findViewById(R.id.listView_newsListPage);
         Toast.makeText(this, R.string.wait_for_response, Toast.LENGTH_SHORT).show();
-        Thread thread = new Thread(new Runnable() {
+        ConnectionManager connectionManager = new ConnectionManager();
+        connectionManager.requestNewsPageInfo();
+        connectionManager.setNewsDataListener(new NewsDataListener() {
             @Override
-            public void run() {
-                ConnectionManager c = new ConnectionManager();
-                try {
-                    newsList = c.getBourseNews();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        BourseNewsAdapter bNA = new BourseNewsAdapter(getApplicationContext(), newsList);
-                        listView.setAdapter(bNA);
-                    }
-                });
+            public void onDataLoaded(List<News> news) {
+                newsList = news ;
+                refresh();
             }
         });
+
+    }
+    private void refresh(){
+        listView.setAdapter(new BourseNewsAdapter(getApplicationContext(),newsList));
     }
 }

@@ -14,13 +14,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
 import a4.folio.ConnectionManager;
 import a4.folio.DataType.Stock;
 import a4.folio.PageInfo.StockPageInfo;
 import a4.folio.R;
+import a4.folio.Listeners.TradeConfirmListener;
 
 /**
  * Created by amir on 5/27/2018.
@@ -39,6 +37,18 @@ public class StockPage extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.stock_page);
+
+        connectionManager = new ConnectionManager();
+        connectionManager.setTradeConfirmListener(new TradeConfirmListener() {
+            @Override
+            public void onTradeComplete(boolean isDone) {
+                if (isDone) {
+                    Toast.makeText(StockPage.this, "انتقال با موفقیت انجام شد.", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(StockPage.this, "انتقال انجام نشد.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
         name = (TextView) findViewById(R.id.textView_StockPage_name);
         namad = (TextView) findViewById(R.id.textView_StockPage_namad);
         mojoodi = (TextView) findViewById(R.id.textView_StockPage_mojoodi);
@@ -194,24 +204,17 @@ public class StockPage extends AppCompatActivity {
         final Double cash = Double.valueOf(String.valueOf(cashMoney.getText()));
         if (numberOfSell <= oldAmount) {
             Toast.makeText(this, "صبر کنید ...", Toast.LENGTH_SHORT).show();
-            Thread thread = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    connectionManager = new ConnectionManager();
-                    if (connectionManager.trade(String.valueOf(namad.getText()), oldAmount - numberOfSell, (int) (cash + (numberOfSell * sellPrice)))) {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                StockListPage.cashMoney = (int) (cash + (numberOfSell * sellPrice));
-                                cashMoney.setText(String.valueOf(StockListPage.cashMoney));
-                                mojoodi.setText(String.valueOf(oldAmount - numberOfSell));
-                            }
-                        });
-                    }//else ...
-                }
-            });
-            ExecutorService executorService = Executors.newFixedThreadPool(1);
-            executorService.execute(thread);
+
+            connectionManager = new ConnectionManager();
+            if (connectionManager.trade(String.valueOf(namad.getText()), oldAmount - numberOfSell, (int) (cash + (numberOfSell * sellPrice)))) {
+
+                StockListPage.cashMoney = (int) (cash + (numberOfSell * sellPrice));
+                cashMoney.setText(String.valueOf(StockListPage.cashMoney));
+                mojoodi.setText(String.valueOf(oldAmount - numberOfSell));
+
+            }//else ...
+
+
         } else {
             Toast.makeText(this, "این تعداد از سهم موجود نیست.", Toast.LENGTH_SHORT).show();
         }
@@ -224,24 +227,11 @@ public class StockPage extends AppCompatActivity {
         final double cash = Double.valueOf(String.valueOf(cashMoney.getText()));
         if ((numberOfBuy * buyPrice) <= cash) {
             Toast.makeText(this, "صبر کنید ...", Toast.LENGTH_SHORT).show();
-            Thread thread = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    connectionManager = new ConnectionManager();
-                    if (connectionManager.trade(String.valueOf(namad.getText()), oldAmount + numberOfBuy, (int) (cash - (numberOfBuy * buyPrice)))) {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                StockListPage.cashMoney = (int) (cash - (numberOfBuy * buyPrice));
-                                cashMoney.setText(String.valueOf(StockListPage.cashMoney));
-                                mojoodi.setText(String.valueOf(oldAmount + numberOfBuy));
-                            }
-                        });
-                    }//else...
-                }
-            });
-            ExecutorService executorService = Executors.newFixedThreadPool(1);
-            executorService.execute(thread);
+            if (connectionManager.trade(String.valueOf(namad.getText()), oldAmount + numberOfBuy, (int) (cash - (numberOfBuy * buyPrice)))) {
+                StockListPage.cashMoney = (int) (cash - (numberOfBuy * buyPrice));
+                cashMoney.setText(String.valueOf(StockListPage.cashMoney));
+                mojoodi.setText(String.valueOf(oldAmount + numberOfBuy));
+            }
         } else {
             Toast.makeText(this, "پول نقد شما کافی نیست.", Toast.LENGTH_SHORT).show();
         }

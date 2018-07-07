@@ -16,7 +16,8 @@
         android:layout_marginTop="6dp"
         android:background="@color/font2"
         android:orientation="horizontal"
-        android:padding="3dp">
+        android:paddingBottom="3dp"
+        android:paddingTop="3dp">
 
         <TextView
             android:id="@+id/textView_homePage_AllMoney"
@@ -49,7 +50,8 @@
         android:layout_marginRight="6dp"
         android:background="@color/font2"
         android:orientation="horizontal"
-        android:padding="3dp">
+        android:paddingBottom="3dp"
+        android:paddingTop="3dp">
 
         <TextView
             android:id="@+id/textView_homePage_Cash"
@@ -82,7 +84,8 @@
         android:layout_marginRight="6dp"
         android:background="@color/font2"
         android:orientation="horizontal"
-        android:padding="3dp">
+        android:paddingBottom="3dp"
+        android:paddingTop="3dp">
 
         <TextView
             android:id="@+id/textView_homePage_stocksValue"
@@ -115,7 +118,8 @@
         android:layout_marginRight="6dp"
         android:background="@color/font2"
         android:orientation="horizontal"
-        android:padding="3dp">
+        android:paddingBottom="3dp"
+        android:paddingTop="3dp">
 
         <TextView
             android:id="@+id/textView_homePage_YesterdayPercent"
@@ -165,27 +169,52 @@
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/Button_homePage_goToStockListPage"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="6dp"
-        android:background="@color/mainBackground"
-        android:text="مشاهده تمام سهام بازار"
-        android:textColor="@color/secondBackground"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/Button_homePage_goToNewsListPage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="6dp"
+            android:layout_marginLeft="6dp"
+            android:layout_marginRight="3dp"
+            android:layout_marginTop="6dp"
+            android:layout_weight="1"
+            android:background="@color/mainBackground"
+            android:text="اخبار"
+            android:textColor="@color/secondBackground"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/Button_homePage_goToStockListPage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="6dp"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="6dp"
+            android:layout_marginTop="6dp"
+            android:layout_weight="1"
+            android:background="@color/mainBackground"
+            android:text="مشاهده تمام سهام بازار"
+            android:textColor="@color/secondBackground"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="3dp"
         android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="3dp"
+            android:layout_marginLeft="6dp"
+            android:layout_marginRight="1dp"
             android:layout_weight="1"
             android:orientation="vertical">
 
@@ -214,7 +243,8 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="3dp"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="6dp"
             android:layout_weight="1"
             android:orientation="vertical">
 

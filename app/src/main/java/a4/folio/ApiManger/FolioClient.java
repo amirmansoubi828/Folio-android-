@@ -22,7 +22,7 @@ public interface FolioClient {
     Call<List<PersonalCapital>> getPersonalCapital(@Path("user") String username);
     @GET("/Membership/buy_sell")
     Call<Void> changeSymbolAmountOnServer(@Query("change") String info );
-    @GET ("")
+    @GET ("/Newsapp_api/see_News")
     Call<List<News>> getBourseNews();
 
 
