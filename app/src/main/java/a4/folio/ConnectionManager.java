@@ -21,14 +21,22 @@ public class ConnectionManager {
     private FolioClient folioClient;
     static String username = "ali";  //will be changed after Login feature
 
-    private PersonalInfoDataListener personalInfoDataListener;
-    private PersonalCapitalDataListener personalCapitalDataListener;
+    private HomaPageDataListener homaPageDataListener;
     private NewsDataListener newsDataListener;
     private BourseInfoDateListener bourseInfoDateListener;
     private TradeConfirmListener tradeConfirmListener;
 
+    private List<Stock> stocksCash;
+    private List<PersonalCapital> personalCapitalsCash;
+    private PersonalInfo personalInfoCash;
+
+    private boolean isDoneStocks, isDoneCapitals, isDonePersonal;
+
     public ConnectionManager() {
         folioClient = RetrofitManager.createService(FolioClient.class);
+        isDoneCapitals = false;
+        isDonePersonal = false;
+        isDoneStocks = false;
     }
 
 
@@ -54,7 +62,13 @@ public class ConnectionManager {
         personalInfoCall.enqueue(new Callback<PersonalInfo>() {
             @Override
             public void onResponse(Call<PersonalInfo> call, Response<PersonalInfo> response) {
-                personalInfoDataListener.onDataLoaded(response.body());
+                if (isDoneCapitals) {
+                    homaPageDataListener.onDataLoaded(personalCapitalsCash, response.body());
+                    isDoneCapitals = false;
+                } else {
+                    personalInfoCash = response.body();
+                    isDonePersonal = true;
+                }
             }
 
             @Override
@@ -69,7 +83,21 @@ public class ConnectionManager {
         personalCapitalCall.enqueue(new Callback<List<PersonalCapital>>() {
             @Override
             public void onResponse(Call<List<PersonalCapital>> call, Response<List<PersonalCapital>> response) {
-                personalCapitalDataListener.onDataLoaded(response.body());
+                if (isDoneStocks) {
+                    bourseInfoDateListener.onDataLoaded(stocksCash, response.body());
+                    isDoneStocks = false;
+                } else {
+                    personalCapitalsCash = response.body();
+                    isDoneCapitals = true;
+                }
+
+                if (isDonePersonal) {
+                    homaPageDataListener.onDataLoaded(response.body(), personalInfoCash);
+                    isDonePersonal = false;
+                } else {
+                    personalCapitalsCash = response.body();
+                    isDoneCapitals = true;
+                }
             }
 
             @Override
@@ -81,11 +109,17 @@ public class ConnectionManager {
     }
 
     private void getBInfoAPI() {
-        Call<List<Stock>> bourseInfoCall = folioClient.getBourseInfo();
+        final Call<List<Stock>> bourseInfoCall = folioClient.getBourseInfo();
         bourseInfoCall.enqueue(new Callback<List<Stock>>() {
             @Override
             public void onResponse(Call<List<Stock>> call, Response<List<Stock>> response) {
-                bourseInfoDateListener.onDataLoaded(response.body());
+                if (isDoneCapitals) {
+                    bourseInfoDateListener.onDataLoaded(response.body(), personalCapitalsCash);
+                    isDoneCapitals = false;
+                } else {
+                    isDoneStocks = true;
+                    stocksCash = response.body();
+                }
             }
 
             @Override
@@ -111,25 +145,32 @@ public class ConnectionManager {
 
     }
 
-    public void requestHomePageInfo(){
+    public void requestHomePageInfo() {
         getPInfoAPI();
         getPCapitalAPI();
     }
 
-    public PersonalInfoDataListener getPersonalInfoDataListener() {
-        return personalInfoDataListener;
+    public void requestStockListPageInfo() {
+        getPCapitalAPI();
+        getBInfoAPI();
     }
 
-    public void setPersonalInfoDataListener(PersonalInfoDataListener personalInfoDataListener) {
-        this.personalInfoDataListener = personalInfoDataListener;
+    public void requestNewsPageInfo() {
+        getBNewsAPI();
     }
 
-    public PersonalCapitalDataListener getPersonalCapitalDataListener() {
-        return personalCapitalDataListener;
+    public boolean trade(String symbol, int newAmount, int newCash) {
+        changeSymbolAmountOnServer(symbol, newAmount, newCash);
+        return true;
     }
 
-    public void setPersonalCapitalDataListener(PersonalCapitalDataListener personalCapitalDataListener) {
-        this.personalCapitalDataListener = personalCapitalDataListener;
+
+    public HomaPageDataListener getHomaPageDataListener() {
+        return homaPageDataListener;
+    }
+
+    public void setHomaPageDataListener(HomaPageDataListener homaPageDataListener) {
+        this.homaPageDataListener = homaPageDataListener;
     }
 
     public NewsDataListener getNewsDataListener() {

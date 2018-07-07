@@ -11,14 +11,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.IOException;
-import java.net.ProtocolException;
-import java.util.ArrayList;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.List;
 
+import a4.folio.ApiManger.PersonalCapital;
+import a4.folio.ApiManger.PersonalInfo;
 import a4.folio.ConnectionManager;
 import a4.folio.DataType.Stock;
+import a4.folio.HomaPageDataListener;
 import a4.folio.PageInfo.HomePageInfo;
 import a4.folio.PageInfo.StockPageInfo;
 import a4.folio.R;
@@ -36,6 +35,21 @@ public class HomePage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
+
+        homePageInfo = new HomePageInfo();
+
+        connectionManager = new ConnectionManager();
+        connectionManager.requestHomePageInfo();
+
+        connectionManager.setHomaPageDataListener(new HomaPageDataListener() {
+            @Override
+            public void onDataLoaded(List<PersonalCapital> personalCapitals, PersonalInfo personalInfo) {
+                homePageInfo.setPersonalInfo(personalInfo);
+                homePageInfo.setPersonalCapitals(personalCapitals);
+                refresh();
+            }
+        });
+
         Toast.makeText(this, R.string.wait_for_response, Toast.LENGTH_SHORT).show();
 
         typefaceBtitr = Typeface.createFromAsset(getApplicationContext().getAssets(), "BTitr.ttf");
@@ -85,113 +99,52 @@ public class HomePage extends AppCompatActivity {
                 }
             }
         });
-
-
     }
 
-    void refresh() throws Exception {
-        connectionManager = new ConnectionManager();
-        try {
-            homePageInfo = connectionManager.getHomepageInfo();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
-        // need to complete listviews
-        final HomePageInfo finalHomePageInfo = homePageInfo;
-        runOnUiThread(new Runnable() {
+    void refresh() {
+        allMoney.setText(String.valueOf(homePageInfo.getAllMoney()));
+        cashMoney.setText(String.valueOf(homePageInfo.getCashMoney()));
+        stocksValue.setText(String.valueOf(homePageInfo.getStocksValue()));
+        allProfit.setText(String.valueOf(homePageInfo.getAllProfit()));
+        yesterdayProfit.setText(String.valueOf(homePageInfo.getYesterdayProfit()));
+        stocksValue.setText(String.valueOf(homePageInfo.getStocksValue()));
+        allMoney.setText(String.valueOf(homePageInfo.getAllMoney()));
+        allProfit.setText(String.valueOf(homePageInfo.getAllProfit()));
+        yesterdayProfit.setText(String.valueOf(homePageInfo.getYesterdayProfit()));
+        positiveList.setAdapter(new PersonalCapitalAdapter(getApplicationContext(), homePageInfo.getPositives(), true));
+        negativeList.setAdapter(new PersonalCapitalAdapter(getApplicationContext(), homePageInfo.getNegatives(), false));
+        positiveList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void run() {
-                allMoney.setText(String.valueOf(homePageInfo.getAllMoney()));
-                cashMoney.setText(String.valueOf(homePageInfo.getCashMoney()));
-                stocksValue.setText(String.valueOf(homePageInfo.getStocksValue()));
-                allProfit.setText(String.valueOf(homePageInfo.getAllProfit()));
-                yesterdayProfit.setText(String.valueOf(homePageInfo.getYesterdayProfit()));
-
-                calculateStocksValue(finalHomePageInfo.getPositives(), finalHomePageInfo.getNegatives());
-                stocksValue.setText(String.valueOf(homePageInfo.getStocksValue()));
-                allMoney.setText(String.valueOf(homePageInfo.getAllMoney()));
-                allProfit.setText(String.valueOf(homePageInfo.getAllProfit()));
-                yesterdayProfit.setText(String.valueOf(homePageInfo.getYesterdayProfit()));
-                positiveList.setAdapter(new PersonalCapitalAdapter(getApplicationContext(), finalHomePageInfo.getPositives(), true));
-                negativeList.setAdapter(new PersonalCapitalAdapter(getApplicationContext(), finalHomePageInfo.getNegatives(), false));
-                positiveList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Stock called = finalHomePageInfo.getPositives().get(position);
-                        StockPageInfo stockPageInfo = new StockPageInfo(called, finalHomePageInfo.getCashMoney(), finalHomePageInfo.getAllMoney());
-                        Intent i = new Intent(HomePage.this, StockPage.class);
-                        Bundle b = new Bundle();
-                        b.putSerializable("stockPI", stockPageInfo);
-                        i.putExtras(b);
-                        startActivity(i);
-                    }
-                });
-                negativeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Stock called = finalHomePageInfo.getNegatives().get(position);
-                        StockPageInfo stockPageInfo = new StockPageInfo(called, finalHomePageInfo.getCashMoney(), finalHomePageInfo.getAllMoney());
-                        Intent i = new Intent(HomePage.this, StockPage.class);
-                        Bundle b = new Bundle();
-                        b.putSerializable("stockPI", stockPageInfo);
-                        i.putExtras(b);
-                        startActivity(i);
-                    }
-                });
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Stock called = homePageInfo.getPositives().get(position);
+                StockPageInfo stockPageInfo = new StockPageInfo(called, homePageInfo.getCashMoney(), homePageInfo.getAllMoney());
+                Intent i = new Intent(HomePage.this, StockPage.class);
+                Bundle b = new Bundle();
+                b.putSerializable("stockPI", stockPageInfo);
+                i.putExtras(b);
+                startActivity(i);
             }
         });
-
+        negativeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Stock called = homePageInfo.getNegatives().get(position);
+                StockPageInfo stockPageInfo = new StockPageInfo(called, homePageInfo.getCashMoney(), homePageInfo.getAllMoney());
+                Intent i = new Intent(HomePage.this, StockPage.class);
+                Bundle b = new Bundle();
+                b.putSerializable("stockPI", stockPageInfo);
+                i.putExtras(b);
+                startActivity(i);
+            }
+        });
     }
+
 
     @Override
     protected void onResume() {
         super.onResume();
-        Runnable runnable = new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    refresh();
-                }catch (ProtocolException e){
-                    e.printStackTrace();
-                    System.out.println("trying again");
-                    try {
-                        refresh();
-                    } catch (Exception e1) {
-                        e1.printStackTrace();
-                    }
-                }catch (IOException ioe){
-                    try {
-                        System.out.println("trying again");
-                        refresh();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        };
-        ExecutorService executorService = Executors.newFixedThreadPool(1);
-        executorService.execute(runnable);
+        connectionManager.requestHomePageInfo();
     }
 
-    private void calculateStocksValue(ArrayList<Stock> positives, ArrayList<Stock> negatives) {
-        int stocksValueInt = 0;
-        int yesterdayProfitInt = 0;
-        for (int i = 0; i < positives.size(); i++) {
-            stocksValueInt += (Integer.valueOf(positives.get(i).getFinal_Amount().replaceAll(",", "")) * positives.get(i).getMojoodi());
-            yesterdayProfitInt += ((Integer.valueOf(positives.get(i).getFinal_Amount().replaceAll(",", "")) - Integer.valueOf(positives.get(i).getYesterday().replaceAll(",", ""))) * positives.get(i).getMojoodi());
-        }
-        for (int i = 0; i < negatives.size(); i++) {
-            stocksValueInt += (Integer.valueOf(negatives.get(i).getFinal_Amount().replaceAll(",", "")) * negatives.get(i).getMojoodi());
-        }
-        homePageInfo.setStocksValue(stocksValueInt);
-        homePageInfo.setYesterdayProfit(yesterdayProfitInt);
-        homePageInfo.setAllMoney(Integer.valueOf(String.valueOf(homePageInfo.getCashMoney())) + stocksValueInt);
-        homePageInfo.setAllProfit(homePageInfo.getAllMoney() - 500000);
-
-    }
 
 }

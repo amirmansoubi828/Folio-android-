@@ -16,9 +16,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
+import a4.folio.ApiManger.PersonalCapital;
+import a4.folio.BourseInfoDateListener;
 import a4.folio.ConnectionManager;
 import a4.folio.DataType.Stock;
 import a4.folio.PageInfo.StockPageInfo;
@@ -35,18 +35,23 @@ public class StockListPage extends AppCompatActivity {
     static int cashMoney, allMoney;
     HorizontalScrollView scrollView;
     ProgressDialog dialog;
+    ConnectionManager connectionManager;
+    List<Stock> bourseInformation;
+    Bundle bundle;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        bundle = savedInstanceState;
         setContentView(R.layout.stock_list_page);
+        connectionManager = new ConnectionManager();
 
         dialog = new ProgressDialog(this); // this = YourActivity
         dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         dialog.setMessage("در حال دریافت اطلاعات\nصبر کنید ...");
         dialog.setIndeterminate(true);
         dialog.setCanceledOnTouchOutside(false);
-
+        dialog.show();
         Toast.makeText(this, R.string.wait, Toast.LENGTH_SHORT).show();
         typefaceBTitr = Typeface.createFromAsset(getApplicationContext().getAssets(), "BTitr.ttf");
         mojoodi = (LinearLayout) findViewById(R.id.mojoodi_layout);
@@ -71,55 +76,37 @@ public class StockListPage extends AppCompatActivity {
         beharz = (LinearLayout) findViewById(R.id.beharz_layout);
         behtagh = (LinearLayout) findViewById(R.id.behtagh_layout);
         scrollView = (HorizontalScrollView) findViewById(R.id.ScrollView_stockListPage);
-        Runnable runnable = new Runnable() {
-            @Override
-            public void run() {
-                refresh();
-            }
-        };
-        ExecutorService executorService = Executors.newFixedThreadPool(1);
-        executorService.execute(runnable);
+
         allMoney = getIntent().getIntExtra("allMoney", 0);
         cashMoney = getIntent().getIntExtra("cashMoney", 0);
+
+        connectionManager.setBourseInfoDateListener(new BourseInfoDateListener() {
+            @Override
+            public void onDataLoaded(List<Stock> stocks, List<PersonalCapital> personalCapitals) {
+                bourseInformation = stocks;
+                for (int i = 0; i < personalCapitals.size(); i++) {
+                    int sci = personalCapitals.get(i).getNumber_of_stocks_person_has();
+                    Stock scs = personalCapitals.get(i).getBourse();
+                    for (int j = 0; j < bourseInformation.size(); j++) {
+                        if (bourseInformation.get(j).getNamad().equals(scs.getNamad())) {
+                            bourseInformation.get(j).setMojoodi(sci);
+                        }
+                    }
+                }
+                refresh();
+            }
+        });
+        connectionManager.requestStockListPageInfo();
 
     }
 
     private void refresh() {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                dialog.show();
-            }
-        });
-
-        ConnectionManager connectionManager = new ConnectionManager();
-        try {
-            List<Stock> bourseInformation = connectionManager.getBourseInformation();
-            for (final Stock s :
-                    bourseInformation) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        addStockToList(s);
-                    }
-                });
-            }
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    scrollView.fullScroll(View.FOCUS_RIGHT);
-                }
-            });
-
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        for (Stock s : bourseInformation) {
+            addStockToList(s);
         }
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                dialog.dismiss();
-            }
-        });
+        scrollView.fullScroll(View.FOCUS_RIGHT);
+        dialog.dismiss();
+
     }
 
     private void addStockToList(final Stock stock) {
@@ -194,5 +181,21 @@ public class StockListPage extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Toast.makeText(this, "resu ", Toast.LENGTH_SHORT).show();
+    }
+    
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        Toast.makeText(this, "presu", Toast.LENGTH_SHORT).show();
+    }
 
+    @Override
+    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        Toast.makeText(this, "pcrea", Toast.LENGTH_SHORT).show();
+    }
 }
