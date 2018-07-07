@@ -18,7 +18,7 @@ import android.widget.Toast;
 import java.util.List;
 
 import a4.folio.ApiManger.PersonalCapital;
-import a4.folio.BourseInfoDateListener;
+import a4.folio.Listeners.BourseInfoDateListener;
 import a4.folio.ConnectionManager;
 import a4.folio.DataType.Stock;
 import a4.folio.PageInfo.StockPageInfo;

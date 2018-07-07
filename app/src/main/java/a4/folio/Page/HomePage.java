@@ -17,7 +17,7 @@ import a4.folio.ApiManger.PersonalCapital;
 import a4.folio.ApiManger.PersonalInfo;
 import a4.folio.ConnectionManager;
 import a4.folio.DataType.Stock;
-import a4.folio.HomaPageDataListener;
+import a4.folio.Listeners.HomaPageDataListener;
 import a4.folio.PageInfo.HomePageInfo;
 import a4.folio.PageInfo.StockPageInfo;
 import a4.folio.R;
