@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 public class News implements Serializable {
     private String title , news_date , news_Quote , news_Body ;
-    int day , month , year ;
+    private int day , month , year ;
 
     public String getTitle() {
         return title;
