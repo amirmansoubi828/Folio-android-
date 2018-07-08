@@ -2,7 +2,7 @@ package a4.folio.Listeners;
 
 import java.util.List;
 
-import a4.folio.ApiManger.PersonalCapital;
+import a4.folio.DataType.PersonalCapital;
 import a4.folio.DataType.Stock;
 
 /**

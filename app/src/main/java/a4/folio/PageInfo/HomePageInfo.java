@@ -3,8 +3,8 @@ package a4.folio.PageInfo;
 import java.util.ArrayList;
 import java.util.List;
 
-import a4.folio.ApiManger.PersonalCapital;
-import a4.folio.ApiManger.PersonalInfo;
+import a4.folio.DataType.PersonalCapital;
+import a4.folio.DataType.PersonalInfo;
 import a4.folio.DataType.Stock;
 
 /**
