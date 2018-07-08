@@ -1,4 +1,4 @@
-package a4.folio.ApiManger;
+package a4.folio.DataType;
 
 /**
  * Created by amir on 5/26/2018.

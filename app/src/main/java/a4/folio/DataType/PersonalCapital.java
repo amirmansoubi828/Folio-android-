@@ -1,4 +1,4 @@
-package a4.folio.ApiManger;
+package a4.folio.DataType;
 
 import a4.folio.DataType.Stock;
 
