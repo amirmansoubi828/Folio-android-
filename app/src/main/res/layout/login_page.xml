@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/secondBackground"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="Username:"
+        android:textColor="@color/font"
+        android:textSize="30sp" />
+
+    <EditText
+        android:id="@+id/login_username_editText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_weight="1"
+        android:background="@color/colorAccent"
+        android:ems="10"
+        android:gravity="center"
+        android:inputType="textPersonName"
+        android:textColor="@color/font" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="Password:"
+        android:textColor="@color/font"
+        android:textSize="30sp" />
+
+    <EditText
+        android:id="@+id/login_password_editText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_weight="1"
+        android:background="@color/colorAccent"
+        android:ems="10"
+        android:gravity="center"
+        android:inputType="textPassword"
+        android:password="true"
+        android:textColor="@color/font" />
+
+    <Button
+        android:id="@+id/login_signIn_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_weight="1"
+        android:background="@color/mainBackground"
+        android:text="Sign In"
+        android:textColor="@color/secondBackground"
+        android:textSize="24sp" />
+
+    <Button
+        android:id="@+id/login_createAccount_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:autoText="false"
+        android:background="@android:color/transparent"
+        android:linksClickable="false"
+        android:text="or Create an account"
+        android:textAllCaps="false"
+        android:textColor="@color/font"
+        android:textSize="24sp" />
+</LinearLayout>
