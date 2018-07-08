@@ -1,4 +1,4 @@
-package a4.folio.Page;
+package a4.folio.Adapter;
 
 import android.content.Context;
 import android.graphics.Typeface;

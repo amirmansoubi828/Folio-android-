@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import java.util.List;
 
+import a4.folio.Adapter.PersonalCapitalAdapter;
 import a4.folio.DataType.PersonalCapital;
 import a4.folio.DataType.PersonalInfo;
 import a4.folio.ConnectionManager;

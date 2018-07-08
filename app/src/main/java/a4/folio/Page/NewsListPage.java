@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import java.util.List;
 
+import a4.folio.Adapter.BourseNewsAdapter;
 import a4.folio.ConnectionManager;
 import a4.folio.DataType.News;
 import a4.folio.Listeners.NewsDataListener;

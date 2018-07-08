@@ -10,6 +10,7 @@ import android.widget.ListView;
 
 import java.util.List;
 
+import a4.folio.Adapter.MoviesAdapter;
 import a4.folio.ConnectionManager;
 import a4.folio.DataType.Movie;
 import a4.folio.Listeners.MovieListPageDataListener;
