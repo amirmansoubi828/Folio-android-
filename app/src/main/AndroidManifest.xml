@@ -21,6 +21,7 @@
         <activity android:name=".Page.StockPage" />
         <activity android:name=".Page.NewsListPage" />
         <activity android:name=".Page.NewsPage" />
+        <activity android:name=".Page.MovieListPage" />
     </application>
 
 </manifest>

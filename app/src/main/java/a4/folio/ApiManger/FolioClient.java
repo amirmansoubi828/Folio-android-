@@ -2,6 +2,7 @@ package a4.folio.ApiManger;
 
 import java.util.List;
 
+import a4.folio.DataType.Movie;
 import a4.folio.DataType.News;
 import a4.folio.DataType.Stock;
 import retrofit2.Call;
@@ -24,6 +25,8 @@ public interface FolioClient {
     Call<Void> changeSymbolAmountOnServer(@Query("change") String info );
     @GET ("/Newsapp_api/see_News")
     Call<List<News>> getBourseNews();
+    @GET ("")
+    Call<List<Movie>> getBourseMovies();
 
 
 }

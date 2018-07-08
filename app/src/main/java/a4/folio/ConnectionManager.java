@@ -6,10 +6,12 @@ import a4.folio.ApiManger.FolioClient;
 import a4.folio.ApiManger.PersonalCapital;
 import a4.folio.ApiManger.PersonalInfo;
 import a4.folio.ApiManger.RetrofitManager;
+import a4.folio.DataType.Movie;
 import a4.folio.DataType.News;
 import a4.folio.DataType.Stock;
 import a4.folio.Listeners.BourseInfoDateListener;
 import a4.folio.Listeners.HomaPageDataListener;
+import a4.folio.Listeners.MovieListPageDataListener;
 import a4.folio.Listeners.NewsDataListener;
 import a4.folio.Listeners.TradeConfirmListener;
 import retrofit2.Call;
@@ -29,6 +31,7 @@ public class ConnectionManager {
     private NewsDataListener newsDataListener;
     private BourseInfoDateListener bourseInfoDateListener;
     private TradeConfirmListener tradeConfirmListener;
+    private MovieListPageDataListener movieListPageDataListener;
 
     private List<Stock> stocksCash;
     private List<PersonalCapital> personalCapitalsCash;
@@ -149,6 +152,21 @@ public class ConnectionManager {
 
     }
 
+    private void getBMoviesAPI() {
+        Call<List<Movie>> bourseMovies = folioClient.getBourseMovies();
+        bourseMovies.enqueue(new Callback<List<Movie>>() {
+            @Override
+            public void onResponse(Call<List<Movie>> call, Response<List<Movie>> response) {
+                movieListPageDataListener.onDataLoaded(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<List<Movie>> call, Throwable throwable) {
+                throwable.printStackTrace();
+            }
+        });
+    }
+
     public void requestHomePageInfo() {
         getPInfoAPI();
         getPCapitalAPI();
@@ -163,11 +181,14 @@ public class ConnectionManager {
         getBNewsAPI();
     }
 
+    public void requestMoviesPageInfo() {
+        getBMoviesAPI();
+    }
+
     public boolean trade(String symbol, int newAmount, int newCash) {
         changeSymbolAmountOnServer(symbol, newAmount, newCash);
         return true;
     }
-
 
     public HomaPageDataListener getHomaPageDataListener() {
         return homaPageDataListener;
@@ -199,5 +220,13 @@ public class ConnectionManager {
 
     public void setTradeConfirmListener(TradeConfirmListener tradeConfirmListener) {
         this.tradeConfirmListener = tradeConfirmListener;
+    }
+
+    public MovieListPageDataListener getMovieListPageDataListener() {
+        return movieListPageDataListener;
+    }
+
+    public void setMovieListPageDataListener(MovieListPageDataListener movieListPageDataListener) {
+        this.movieListPageDataListener = movieListPageDataListener;
     }
 }

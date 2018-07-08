@@ -5,7 +5,7 @@ package a4.folio.DataType;
  */
 
 public class Movie {
-    private String name , date , length , size , link ;
+    private String name , date , length , size , link , detail ;
 
     public String getName() {
         return name;
@@ -25,5 +25,9 @@ public class Movie {
 
     public String getLink() {
         return link;
+    }
+
+    public String getDetail() {
+        return detail;
     }
 }
