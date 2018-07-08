@@ -30,4 +30,28 @@ public class Movie {
     public String getDetail() {
         return detail;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public void setLength(String length) {
+        this.length = length;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
+
+    public void setDetail(String detail) {
+        this.detail = detail;
+    }
 }

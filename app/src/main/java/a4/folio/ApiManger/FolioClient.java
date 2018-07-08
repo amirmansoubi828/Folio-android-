@@ -25,7 +25,7 @@ public interface FolioClient {
     Call<Void> changeSymbolAmountOnServer(@Query("change") String info );
     @GET ("/Newsapp_api/see_News")
     Call<List<News>> getBourseNews();
-    @GET ("")
+    @GET ("/Education_api/all_videos")
     Call<List<Movie>> getBourseMovies();
 
 

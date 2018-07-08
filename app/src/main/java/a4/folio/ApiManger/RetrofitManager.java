@@ -10,7 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class RetrofitManager {
-    static String BASE_URL = "http://192.168.43.27:8000/" ;
+    static String BASE_URL = "http://192.168.43.137:8000/" ;
     private static Retrofit.Builder builder =
             new Retrofit.Builder()
                     .baseUrl(BASE_URL)
