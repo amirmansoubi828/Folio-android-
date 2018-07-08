@@ -3,8 +3,8 @@ package a4.folio;
 import java.util.List;
 
 import a4.folio.ApiManger.FolioClient;
-import a4.folio.ApiManger.PersonalCapital;
-import a4.folio.ApiManger.PersonalInfo;
+import a4.folio.DataType.PersonalCapital;
+import a4.folio.DataType.PersonalInfo;
 import a4.folio.ApiManger.RetrofitManager;
 import a4.folio.DataType.Movie;
 import a4.folio.DataType.News;

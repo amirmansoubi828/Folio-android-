@@ -4,6 +4,8 @@ import java.util.List;
 
 import a4.folio.DataType.Movie;
 import a4.folio.DataType.News;
+import a4.folio.DataType.PersonalCapital;
+import a4.folio.DataType.PersonalInfo;
 import a4.folio.DataType.Stock;
 import retrofit2.Call;
 import retrofit2.http.GET;

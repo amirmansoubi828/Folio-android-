@@ -56,7 +56,7 @@ public class MoviesAdapter extends BaseAdapter {
         title.setText(moviesList.get(position).getName());
         date.setText(moviesList.get(position).getDate());
         detail.setText(moviesList.get(position).getDetail());
-        length.setText(moviesList.get(position).getLength());
+        length.setText(moviesList.get(position).getLength() + "دقیقه" + moviesList.get(position).getSize() + "بایت");
 
         date.setTypeface(bTitr);
         title.setTypeface(bNazanin);
