@@ -22,7 +22,7 @@ public class MoviesAdapter extends BaseAdapter {
     private LayoutInflater layoutInflater;
     private Typeface bNazanin, bTitr;
 
-    MoviesAdapter(Context context, List<Movie> moviesList) {
+    public MoviesAdapter(Context context, List<Movie> moviesList) {
         this.moviesList = moviesList;
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         bTitr = Typeface.createFromAsset(context.getAssets(), "BTitr.ttf");

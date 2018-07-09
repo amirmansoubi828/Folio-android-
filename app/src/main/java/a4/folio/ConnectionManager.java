@@ -3,16 +3,18 @@ package a4.folio;
 import java.util.List;
 
 import a4.folio.ApiManger.FolioClient;
-import a4.folio.DataType.PersonalCapital;
-import a4.folio.DataType.PersonalInfo;
 import a4.folio.ApiManger.RetrofitManager;
 import a4.folio.DataType.Movie;
 import a4.folio.DataType.News;
+import a4.folio.DataType.PersonalCapital;
+import a4.folio.DataType.PersonalInfo;
+import a4.folio.DataType.ResultMessage;
 import a4.folio.DataType.Stock;
 import a4.folio.Listeners.BourseInfoDateListener;
 import a4.folio.Listeners.HomaPageDataListener;
 import a4.folio.Listeners.MovieListPageDataListener;
 import a4.folio.Listeners.NewsDataListener;
+import a4.folio.Listeners.ResultListener;
 import a4.folio.Listeners.TradeConfirmListener;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -25,13 +27,14 @@ import retrofit2.Response;
 public class ConnectionManager {
 
     private FolioClient folioClient;
-    static String username = "ali";  //will be changed after Login feature
+    static private String username;
 
     private HomaPageDataListener homaPageDataListener;
     private NewsDataListener newsDataListener;
     private BourseInfoDateListener bourseInfoDateListener;
     private TradeConfirmListener tradeConfirmListener;
     private MovieListPageDataListener movieListPageDataListener;
+    private ResultListener loginListener, logoutListener, createUserListener;
 
     private List<Stock> stocksCash;
     private List<PersonalCapital> personalCapitalsCash;
@@ -167,6 +170,69 @@ public class ConnectionManager {
         });
     }
 
+    //// FIXME: 7/9/2018
+    private void loginApi(String username, String password) {
+        Call<ResultMessage> login = folioClient.login(username + "*" + password);
+        login.enqueue(new Callback<ResultMessage>() {
+            @Override
+            public void onResponse(Call<ResultMessage> call, Response<ResultMessage> response) {
+                loginListener.onResultReceived(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<ResultMessage> call, Throwable throwable) {
+                throwable.printStackTrace();
+                loginListener.onResultReceived(new ResultMessage(false, "connectionProblem"));
+            }
+        });
+    }
+
+    //// FIXME: 7/9/2018
+    private void logoutApi(String username, String password) {
+        final Call<ResultMessage> resultCall = folioClient.logOut("");
+        resultCall.enqueue(new Callback<ResultMessage>() {
+            @Override
+            public void onResponse(Call<ResultMessage> call, Response<ResultMessage> response) {
+                logoutListener.onResultReceived(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<ResultMessage> call, Throwable throwable) {
+                throwable.printStackTrace();
+                logoutListener.onResultReceived(new ResultMessage(false, "connectionProblem"));
+            }
+        });
+    }
+
+    //// FIXME: 7/9/2018
+    private void createUserApi(String username, String password) {
+        Call<ResultMessage> user = folioClient.createUser("");
+        user.enqueue(new Callback<ResultMessage>() {
+            @Override
+            public void onResponse(Call<ResultMessage> call, Response<ResultMessage> response) {
+                createUserListener.onResultReceived(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<ResultMessage> call, Throwable throwable) {
+                throwable.printStackTrace();
+                createUserListener.onResultReceived(new ResultMessage(false, "connectionProblem"));
+            }
+        });
+    }
+
+    public void requestLogin(String username, String password) {
+        loginApi(username, password);
+    }
+
+    public void requestLogout(String username, String password) {
+        logoutApi(username, password);
+    }
+
+    public void requestCreateUser(String username, String password) {
+        createUserApi(username, password);
+    }
+
     public void requestHomePageInfo() {
         getPInfoAPI();
         getPCapitalAPI();
@@ -228,5 +294,37 @@ public class ConnectionManager {
 
     public void setMovieListPageDataListener(MovieListPageDataListener movieListPageDataListener) {
         this.movieListPageDataListener = movieListPageDataListener;
+    }
+
+    public ResultListener getLoginListener() {
+        return loginListener;
+    }
+
+    public void setLoginListener(ResultListener loginListener) {
+        this.loginListener = loginListener;
+    }
+
+    public ResultListener getLogoutListener() {
+        return logoutListener;
+    }
+
+    public void setLogoutListener(ResultListener logoutListener) {
+        this.logoutListener = logoutListener;
+    }
+
+    public ResultListener getCreateUserListener() {
+        return createUserListener;
+    }
+
+    public void setCreateUserListener(ResultListener createUserListener) {
+        this.createUserListener = createUserListener;
+    }
+
+    static public String getUsername() {
+        return username;
+    }
+
+    static public void setUsername(String un) {
+        username = un;
     }
 }

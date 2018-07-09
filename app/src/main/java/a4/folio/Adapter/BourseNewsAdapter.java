@@ -22,7 +22,7 @@ public class BourseNewsAdapter extends BaseAdapter {
     private LayoutInflater layoutInflater;
     private Typeface bNazanin, bTitr;
 
-    BourseNewsAdapter(Context context, List<News> newsList) {
+    public BourseNewsAdapter(Context context, List<News> newsList) {
         this.newsList = newsList;
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         bTitr = Typeface.createFromAsset(context.getAssets(), "BTitr.ttf");

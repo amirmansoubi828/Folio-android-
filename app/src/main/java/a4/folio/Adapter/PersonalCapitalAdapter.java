@@ -18,13 +18,13 @@ import a4.folio.DataType.Stock;
  * Created by amir on 5/28/2018.
  */
 
-class PersonalCapitalAdapter extends BaseAdapter {
+public class PersonalCapitalAdapter extends BaseAdapter {
     private ArrayList<Stock> stocks;
     private LayoutInflater layoutInflater;
     private boolean pos;
     private Typeface typeface;
 
-    PersonalCapitalAdapter(Context context, ArrayList<Stock> stocks, boolean isPositive) {
+    public PersonalCapitalAdapter(Context context, ArrayList<Stock> stocks, boolean isPositive) {
         typeface = Typeface.createFromAsset(context.getAssets(), "BTitr.ttf");
         this.stocks = stocks;
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
