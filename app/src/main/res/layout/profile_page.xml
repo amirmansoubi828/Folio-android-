@@ -1,70 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/secondBackground"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/ProfilePage_textView_username"
-        android:layout_width="match_parent"
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/ProfilePage_FAB"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:text="Username"
-        android:textAlignment="center"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="30sp"
-        android:textStyle="bold" />
+        android:layout_gravity="top|right"
+        android:layout_margin="20dp"
+        android:clickable="true"
+        app:backgroundTint="@color/font2"
+        app:fabSize="mini"
+        app:srcCompat="@android:drawable/ic_lock_power_off" />
 
-    <Button
-        android:id="@+id/ProfilePage_button_goToHomePage"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_weight="1"
-        android:background="@color/mainBackground"
-        android:drawableLeft="@mipmap/table"
-        android:paddingLeft="30dp"
-        android:text="تالار مجازی"
-        android:textColor="@color/secondBackground"
-        android:textSize="30sp" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/ProfilePage_button_goToNewsListPage"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_weight="1"
-        android:background="@color/mainBackground"
-        android:drawableLeft="@mipmap/news"
-        android:paddingLeft="30dp"
-        android:text="اخبار"
-        android:textColor="@color/secondBackground"
-        android:textSize="30sp" />
+        <TextView
+            android:id="@+id/ProfilePage_textView_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Username"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="30sp"
+            android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/ProfilePage_button_goToMovieListPage"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_weight="1"
-        android:background="@color/mainBackground"
-        android:drawableLeft="@mipmap/movie"
-        android:paddingLeft="30dp"
-        android:text="فیلم"
-        android:textColor="@color/secondBackground"
-        android:textSize="30sp" />
+        <Button
+            android:id="@+id/ProfilePage_button_goToHomePage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_weight="1"
+            android:background="@color/mainBackground"
+            android:drawableLeft="@mipmap/table"
+            android:paddingLeft="30dp"
+            android:text="تالار مجازی"
+            android:textColor="@color/secondBackground"
+            android:textSize="30sp" />
 
-</LinearLayout>
+        <Button
+            android:id="@+id/ProfilePage_button_goToNewsListPage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_weight="1"
+            android:background="@color/mainBackground"
+            android:drawableLeft="@mipmap/news"
+            android:paddingLeft="30dp"
+            android:text="اخبار"
+            android:textColor="@color/secondBackground"
+            android:textSize="30sp" />
+
+        <Button
+            android:id="@+id/ProfilePage_button_goToMovieListPage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_weight="1"
+            android:background="@color/mainBackground"
+            android:drawableLeft="@mipmap/movie"
+            android:paddingLeft="30dp"
+            android:text="فیلم"
+            android:textColor="@color/secondBackground"
+            android:textSize="30sp" />
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>

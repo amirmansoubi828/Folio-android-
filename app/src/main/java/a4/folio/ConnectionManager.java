@@ -11,7 +11,8 @@ import a4.folio.DataType.PersonalInfo;
 import a4.folio.DataType.ResultMessage;
 import a4.folio.DataType.Stock;
 import a4.folio.Listeners.BourseInfoDateListener;
-import a4.folio.Listeners.HomaPageDataListener;
+import a4.folio.Listeners.HomePageDataListener;
+import a4.folio.Listeners.LogoutResultListener;
 import a4.folio.Listeners.MovieListPageDataListener;
 import a4.folio.Listeners.NewsDataListener;
 import a4.folio.Listeners.ResultListener;
@@ -26,15 +27,16 @@ import retrofit2.Response;
 
 public class ConnectionManager {
 
-    private FolioClient folioClient;
+    static private FolioClient folioClient;
     static private String username;
 
-    private HomaPageDataListener homaPageDataListener;
+    private HomePageDataListener homePageDataListener;
     private NewsDataListener newsDataListener;
     private BourseInfoDateListener bourseInfoDateListener;
     private TradeConfirmListener tradeConfirmListener;
     private MovieListPageDataListener movieListPageDataListener;
-    private ResultListener loginListener, logoutListener, createUserListener;
+    private ResultListener loginListener, createUserListener;
+    private LogoutResultListener logoutResultListener;
 
     private List<Stock> stocksCash;
     private List<PersonalCapital> personalCapitalsCash;
@@ -43,7 +45,17 @@ public class ConnectionManager {
     private boolean isDoneStocks, isDoneCapitals, isDonePersonal;
 
     public ConnectionManager() {
+
         folioClient = RetrofitManager.createService(FolioClient.class);
+
+        isDoneCapitals = false;
+        isDonePersonal = false;
+        isDoneStocks = false;
+    }
+
+    public ConnectionManager(String username, String password) {
+        folioClient = RetrofitManager.createService(FolioClient.class, username, password);
+
         isDoneCapitals = false;
         isDonePersonal = false;
         isDoneStocks = false;
@@ -73,7 +85,7 @@ public class ConnectionManager {
             @Override
             public void onResponse(Call<PersonalInfo> call, Response<PersonalInfo> response) {
                 if (isDoneCapitals) {
-                    homaPageDataListener.onDataLoaded(personalCapitalsCash, response.body());
+                    homePageDataListener.onDataLoaded(personalCapitalsCash, response.body());
                     isDoneCapitals = false;
                 } else {
                     personalInfoCash = response.body();
@@ -102,7 +114,7 @@ public class ConnectionManager {
                 }
 
                 if (isDonePersonal) {
-                    homaPageDataListener.onDataLoaded(response.body(), personalInfoCash);
+                    homePageDataListener.onDataLoaded(response.body(), personalInfoCash);
                     isDonePersonal = false;
                 } else {
                     personalCapitalsCash = response.body();
@@ -172,11 +184,13 @@ public class ConnectionManager {
 
     //// FIXME: 7/9/2018
     private void loginApi(String username, String password) {
-        Call<ResultMessage> login = folioClient.login(username + "*" + password);
-        login.enqueue(new Callback<ResultMessage>() {
+        Call<ResultMessage> logincall = folioClient.login(username + "*" + password);
+        System.out.println("login");
+        logincall.enqueue(new Callback<ResultMessage>() {
             @Override
             public void onResponse(Call<ResultMessage> call, Response<ResultMessage> response) {
                 loginListener.onResultReceived(response.body());
+
             }
 
             @Override
@@ -188,18 +202,19 @@ public class ConnectionManager {
     }
 
     //// FIXME: 7/9/2018
-    private void logoutApi(String username, String password) {
-        final Call<ResultMessage> resultCall = folioClient.logOut("");
-        resultCall.enqueue(new Callback<ResultMessage>() {
+    private void logoutApi(String username) {
+        Call<ResultMessage> logoutCall = folioClient.logout(username + "*" + "0000");
+        System.out.println("logout");
+        logoutCall.enqueue(new Callback<ResultMessage>() {
             @Override
             public void onResponse(Call<ResultMessage> call, Response<ResultMessage> response) {
-                logoutListener.onResultReceived(response.body());
+                logoutResultListener.onResultReceived(response.body());
             }
 
             @Override
             public void onFailure(Call<ResultMessage> call, Throwable throwable) {
                 throwable.printStackTrace();
-                logoutListener.onResultReceived(new ResultMessage(false, "connectionProblem"));
+                logoutResultListener.onResultReceived(new ResultMessage(false, "connectionProblem"));
             }
         });
     }
@@ -225,8 +240,8 @@ public class ConnectionManager {
         loginApi(username, password);
     }
 
-    public void requestLogout(String username, String password) {
-        logoutApi(username, password);
+    public void requestLogout(String username) {
+        logoutApi(username);
     }
 
     public void requestCreateUser(String username, String password) {
@@ -256,12 +271,12 @@ public class ConnectionManager {
         return true;
     }
 
-    public HomaPageDataListener getHomaPageDataListener() {
-        return homaPageDataListener;
+    public HomePageDataListener getHomePageDataListener() {
+        return homePageDataListener;
     }
 
-    public void setHomaPageDataListener(HomaPageDataListener homaPageDataListener) {
-        this.homaPageDataListener = homaPageDataListener;
+    public void setHomePageDataListener(HomePageDataListener homePageDataListener) {
+        this.homePageDataListener = homePageDataListener;
     }
 
     public NewsDataListener getNewsDataListener() {
@@ -304,12 +319,12 @@ public class ConnectionManager {
         this.loginListener = loginListener;
     }
 
-    public ResultListener getLogoutListener() {
-        return logoutListener;
+    public LogoutResultListener getLogoutResultListener() {
+        return logoutResultListener;
     }
 
-    public void setLogoutListener(ResultListener logoutListener) {
-        this.logoutListener = logoutListener;
+    public void setLogoutResultListener(LogoutResultListener logoutResultListener) {
+        this.logoutResultListener = logoutResultListener;
     }
 
     public ResultListener getCreateUserListener() {

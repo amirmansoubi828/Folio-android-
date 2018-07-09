@@ -18,7 +18,7 @@ import a4.folio.DataType.PersonalCapital;
 import a4.folio.DataType.PersonalInfo;
 import a4.folio.ConnectionManager;
 import a4.folio.DataType.Stock;
-import a4.folio.Listeners.HomaPageDataListener;
+import a4.folio.Listeners.HomePageDataListener;
 import a4.folio.PageInfo.HomePageInfo;
 import a4.folio.PageInfo.StockPageInfo;
 import a4.folio.R;
@@ -42,7 +42,7 @@ public class HomePage extends AppCompatActivity {
         connectionManager = new ConnectionManager();
         connectionManager.requestHomePageInfo();
 
-        connectionManager.setHomaPageDataListener(new HomaPageDataListener() {
+        connectionManager.setHomePageDataListener(new HomePageDataListener() {
             @Override
             public void onDataLoaded(List<PersonalCapital> personalCapitals, PersonalInfo personalInfo) {
                 homePageInfo.setPersonalInfo(personalInfo);

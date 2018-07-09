@@ -9,6 +9,6 @@ import a4.folio.DataType.PersonalInfo;
  * Created by amir on 7/6/2018.
  */
 
-public interface HomaPageDataListener {
+public interface HomePageDataListener {
     void onDataLoaded(List<PersonalCapital> personalCapitals, PersonalInfo personalInfo);
 }

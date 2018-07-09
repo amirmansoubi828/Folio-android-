@@ -32,7 +32,7 @@ public class LoginPage extends AppCompatActivity {
         password = (EditText) findViewById(R.id.login_password_editText);
         signIn = (Button) findViewById(R.id.login_signIn_button);
         goToSignUp = (Button) findViewById(R.id.login_createAccount_button);
-        connectionManager = new ConnectionManager();
+        connectionManager = new ConnectionManager(username.getText().toString(), password.getText().toString());
         connectionManager.setLoginListener(new ResultListener() {
             @Override
             public void onResultReceived(ResultMessage message) {
@@ -41,6 +41,7 @@ public class LoginPage extends AppCompatActivity {
                     ConnectionManager.setUsername(username.getText().toString());
                     Intent intent = new Intent(LoginPage.this, ProfilePage.class);
                     startActivity(intent);
+                    //finish();
                 }
             }
         });

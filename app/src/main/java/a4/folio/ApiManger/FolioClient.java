@@ -37,14 +37,14 @@ public interface FolioClient {
     @GET("/Education_api/all_videos")
     Call<List<Movie>> getBourseMovies();
 
-    @GET("/login/in")
+    @GET("/login/in/")
     Call<ResultMessage> login(@Query("login") String info);
 
-    @POST("")
+    @POST("Personapp_api")
     Call<ResultMessage> createUser(@Path("info") String info);
 
-    @GET("")
-    Call<ResultMessage> logOut(@Path("info") String info);
+    @GET("/login/out/")
+    Call<ResultMessage> logout(@Query("logout") String info);
 
 
 }
