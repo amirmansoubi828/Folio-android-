@@ -26,7 +26,7 @@ import a4.folio.R;
 public class HomePage extends AppCompatActivity {
     TextView allMoney, cashMoney, stocksValue, allProfit, yesterdayProfit;
     TextView allMoneyPersian, cashMoneyPersian, stocksValuePersian, allProfitPersian, yesterdayProfitPersian, positivePersian, negativePersian;
-    Button goToStockListPage, goToNewsListPage, goToMoviesListPage;
+    Button goToStockListPage;
     ListView positiveList, negativeList;
     ConnectionManager connectionManager;
     HomePageInfo homePageInfo;
@@ -79,8 +79,7 @@ public class HomePage extends AppCompatActivity {
         negativePersian.setTypeface(typefaceBnazanin);
 
         goToStockListPage = (Button) findViewById(R.id.Button_homePage_goToStockListPage);
-        goToNewsListPage = (Button) findViewById(R.id.Button_homePage_goToNewsListPage);
-        goToMoviesListPage = (Button) findViewById(R.id.Button_homePage_goToMovieListPage);
+
 
 
         positiveList = (ListView) findViewById(R.id.listView_homePage_positive_stocks);
@@ -104,18 +103,7 @@ public class HomePage extends AppCompatActivity {
                 }
             }
         });
-        goToNewsListPage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(HomePage.this, NewsListPage.class));
-            }
-        });
-        goToMoviesListPage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(HomePage.this, MovieListPage.class));
-            }
-        });
+
     }
 
     void refresh() {

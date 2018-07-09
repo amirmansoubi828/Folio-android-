@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/ProfilePage_textView_username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
@@ -20,7 +20,7 @@
         android:textStyle="bold" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/ProfilePage_button_goToHomePage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
@@ -29,12 +29,14 @@
         android:layout_marginTop="20dp"
         android:layout_weight="1"
         android:background="@color/mainBackground"
+        android:drawableLeft="@mipmap/table"
+        android:paddingLeft="30dp"
         android:text="تالار مجازی"
         android:textColor="@color/secondBackground"
         android:textSize="30sp" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/ProfilePage_button_goToNewsListPage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
@@ -43,12 +45,14 @@
         android:layout_marginTop="20dp"
         android:layout_weight="1"
         android:background="@color/mainBackground"
+        android:drawableLeft="@mipmap/news"
+        android:paddingLeft="30dp"
         android:text="اخبار"
         android:textColor="@color/secondBackground"
         android:textSize="30sp" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/ProfilePage_button_goToMovieListPage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
@@ -57,6 +61,8 @@
         android:layout_marginTop="20dp"
         android:layout_weight="1"
         android:background="@color/mainBackground"
+        android:drawableLeft="@mipmap/movie"
+        android:paddingLeft="30dp"
         android:text="فیلم"
         android:textColor="@color/secondBackground"
         android:textSize="30sp" />

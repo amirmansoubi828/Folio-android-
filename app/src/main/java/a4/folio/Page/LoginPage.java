@@ -39,7 +39,7 @@ public class LoginPage extends AppCompatActivity {
                 Toast.makeText(LoginPage.this, String.valueOf(message.getResult() + " " + message.getInfo()), Toast.LENGTH_SHORT).show();
                 if (message.getResult()) {
                     ConnectionManager.setUsername(username.getText().toString());
-                    Intent intent = new Intent(LoginPage.this, HomePage.class);
+                    Intent intent = new Intent(LoginPage.this, ProfilePage.class);
                     startActivity(intent);
                 }
             }

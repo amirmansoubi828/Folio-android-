@@ -178,23 +178,6 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/Button_homePage_goToMovieListPage"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="2dp"
-            android:layout_marginLeft="1dp"
-            android:layout_marginRight="1dp"
-            android:layout_marginTop="2dp"
-            android:layout_weight="1"
-            android:background="@color/mainBackground"
-            android:drawableLeft="@mipmap/movie"
-            android:paddingLeft="10dp"
-            android:text="فیلم"
-            android:textColor="@color/secondBackground"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <Button
             android:id="@+id/Button_homePage_goToStockListPage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -204,26 +187,8 @@
             android:layout_marginTop="2dp"
             android:layout_weight="1"
             android:background="@color/mainBackground"
-            android:drawableLeft="@mipmap/table"
             android:paddingLeft="10dp"
-            android:text="بازار"
-            android:textColor="@color/secondBackground"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/Button_homePage_goToNewsListPage"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="2dp"
-            android:layout_marginLeft="1dp"
-            android:layout_marginRight="1dp"
-            android:layout_marginTop="2dp"
-            android:layout_weight="1"
-            android:background="@color/mainBackground"
-            android:drawableLeft="@mipmap/news"
-            android:paddingLeft="10dp"
-            android:text="اخبار"
+            android:text="مشاهده لیست سهام"
             android:textColor="@color/secondBackground"
             android:textSize="18sp"
             android:textStyle="bold" />

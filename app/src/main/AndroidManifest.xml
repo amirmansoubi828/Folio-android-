@@ -28,6 +28,7 @@
             android:name=".Page.VideoPlayerPage"
             android:screenOrientation="landscape" />
         <activity android:name=".Page.HomePage" />
+        <activity android:name=".Page.ProfilePage" />
     </application>
 
 </manifest>
