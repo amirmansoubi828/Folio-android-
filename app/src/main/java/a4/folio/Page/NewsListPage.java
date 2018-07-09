@@ -22,21 +22,21 @@ import a4.folio.R;
  */
 
 public class NewsListPage extends AppCompatActivity {
-    ListView listView;
-    List<News> newsList;
-
+    private ListView listView;
+    private List<News> newsList;
+    private ConnectionManager connectionManager;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.news_list_page);
         listView = (ListView) findViewById(R.id.listView_newsListPage);
         Toast.makeText(this, R.string.wait_for_response, Toast.LENGTH_SHORT).show();
-        ConnectionManager connectionManager = new ConnectionManager();
+        connectionManager = new ConnectionManager();
         connectionManager.requestNewsPageInfo();
         connectionManager.setNewsDataListener(new NewsDataListener() {
             @Override
-            public void onDataLoaded(List<News> news) {
-                newsList = news;
+            public void onDataLoaded(List<News> newsList) {
+                NewsListPage.this.newsList = newsList;
                 refresh();
             }
         });

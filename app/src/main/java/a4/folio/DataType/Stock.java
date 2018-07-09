@@ -7,11 +7,12 @@ import java.io.Serializable;
  */
 
 public class Stock implements Serializable {
-    private String namad, name , market  ;
-    private String volume , value , count_Of_Transaction , max_V , min_V
+    private String namad, name , market , volume , value
+            , count_Of_Transaction , max_V , min_V
             , final_Amount , final_Change , lastest_Change , lastest_Amount ,
-            startingPrice , yesterday , PE , EPS , stock_Market_Value , best_Supply , best_Demand ;
-    private String final_Persentage , lastest_Percentage , index_Percentage ;
+            startingPrice , yesterday , PE , EPS
+            , stock_Market_Value , best_Supply , best_Demand ,
+            final_Persentage , lastest_Percentage , index_Percentage ;
     private int mojoodi;
 
     public int getMojoodi() {

@@ -16,22 +16,22 @@ import android.widget.Toast;
 
 import a4.folio.ConnectionManager;
 import a4.folio.DataType.Stock;
+import a4.folio.Listeners.TradeConfirmListener;
 import a4.folio.PageInfo.StockPageInfo;
 import a4.folio.R;
-import a4.folio.Listeners.TradeConfirmListener;
 
 /**
  * Created by amir on 5/27/2018.
  */
 
 public class StockPage extends AppCompatActivity {
-    TextView name, namad, mojoodi, gheymatAkharin, taghirAkharin, darsadAkharin, gheymatPayani, taghirPayani, darsadPayani, bishtarin, kamtarin, dafaateMoamele, hajmMoamelat, aghazin, yesterday, arzeshMoamelat, tasirDarShakhes, pe, eps;
-    EditText tedadForoush, tedadKharid;
-    TextView gheymatKharid, gheymatForoush, cashMoney;
-    Button kharid, forush;
-    int buyPrice, sellPrice;
-    Typeface typeface;
-    ConnectionManager connectionManager;
+    private TextView name, namad, mojoodi, gheymatAkharin, taghirAkharin, darsadAkharin, gheymatPayani, taghirPayani, darsadPayani, bishtarin, kamtarin, dafaateMoamele, hajmMoamelat, aghazin, yesterday, arzeshMoamelat, tasirDarShakhes, pe, eps;
+    private EditText tedadForoush, tedadKharid;
+    private TextView gheymatKharid, gheymatForoush, cashMoney;
+    private Button kharid, forush;
+    private int buyPrice, sellPrice;
+    private Typeface typeface;
+    private ConnectionManager connectionManager;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -49,6 +49,7 @@ public class StockPage extends AppCompatActivity {
                 }
             }
         });
+
         name = (TextView) findViewById(R.id.textView_StockPage_name);
         namad = (TextView) findViewById(R.id.textView_StockPage_namad);
         mojoodi = (TextView) findViewById(R.id.textView_StockPage_mojoodi);
@@ -205,11 +206,10 @@ public class StockPage extends AppCompatActivity {
         if (numberOfSell <= oldAmount) {
             Toast.makeText(this, "صبر کنید ...", Toast.LENGTH_SHORT).show();
 
-            connectionManager = new ConnectionManager();
             if (connectionManager.trade(String.valueOf(namad.getText()), oldAmount - numberOfSell, (int) (cash + (numberOfSell * sellPrice)))) {
 
-                StockListPage.cashMoney = (int) (cash + (numberOfSell * sellPrice));
-                cashMoney.setText(String.valueOf(StockListPage.cashMoney));
+                StockListPage.setCashMoney((int) (cash + (numberOfSell * sellPrice)));
+                cashMoney.setText(String.valueOf(StockListPage.getCashMoney()));
                 mojoodi.setText(String.valueOf(oldAmount - numberOfSell));
 
             }//else ...
@@ -228,8 +228,8 @@ public class StockPage extends AppCompatActivity {
         if ((numberOfBuy * buyPrice) <= cash) {
             Toast.makeText(this, "صبر کنید ...", Toast.LENGTH_SHORT).show();
             if (connectionManager.trade(String.valueOf(namad.getText()), oldAmount + numberOfBuy, (int) (cash - (numberOfBuy * buyPrice)))) {
-                StockListPage.cashMoney = (int) (cash - (numberOfBuy * buyPrice));
-                cashMoney.setText(String.valueOf(StockListPage.cashMoney));
+                StockListPage.setCashMoney((int) (cash - (numberOfBuy * buyPrice)));
+                cashMoney.setText(String.valueOf(StockListPage.getCashMoney()));
                 mojoodi.setText(String.valueOf(oldAmount + numberOfBuy));
             }
         } else {

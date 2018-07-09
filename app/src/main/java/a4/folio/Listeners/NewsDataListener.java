@@ -9,5 +9,5 @@ import a4.folio.DataType.News;
  */
 
 public interface NewsDataListener {
-    void onDataLoaded(List<News> newsArrayList);
+    void onDataLoaded(List<News> newsList);
 }

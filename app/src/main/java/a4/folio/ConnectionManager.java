@@ -28,7 +28,7 @@ import retrofit2.Response;
 public class ConnectionManager {
 
     static private FolioClient folioClient;
-    static private String username;
+    static private String username = "ali";
 
     private HomePageDataListener homePageDataListener;
     private NewsDataListener newsDataListener;
@@ -168,8 +168,8 @@ public class ConnectionManager {
     }
 
     private void getBMoviesAPI() {
-        Call<List<Movie>> bourseMovies = folioClient.getBourseMovies();
-        bourseMovies.enqueue(new Callback<List<Movie>>() {
+        Call<List<Movie>> bourseMoviesCall = folioClient.getBourseMovies();
+        bourseMoviesCall.enqueue(new Callback<List<Movie>>() {
             @Override
             public void onResponse(Call<List<Movie>> call, Response<List<Movie>> response) {
                 movieListPageDataListener.onDataLoaded(response.body());

@@ -40,6 +40,7 @@ public interface FolioClient {
     @GET("/login/in/")
     Call<ResultMessage> login(@Query("login") String info);
 
+    //// FIXME: 7/9/2018 
     @POST("Personapp_api")
     Call<ResultMessage> createUser(@Path("info") String info);
 

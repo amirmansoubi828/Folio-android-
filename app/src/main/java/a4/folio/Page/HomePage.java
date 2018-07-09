@@ -14,9 +14,9 @@ import android.widget.Toast;
 import java.util.List;
 
 import a4.folio.Adapter.PersonalCapitalAdapter;
+import a4.folio.ConnectionManager;
 import a4.folio.DataType.PersonalCapital;
 import a4.folio.DataType.PersonalInfo;
-import a4.folio.ConnectionManager;
 import a4.folio.DataType.Stock;
 import a4.folio.Listeners.HomePageDataListener;
 import a4.folio.PageInfo.HomePageInfo;
@@ -24,13 +24,15 @@ import a4.folio.PageInfo.StockPageInfo;
 import a4.folio.R;
 
 public class HomePage extends AppCompatActivity {
-    TextView allMoney, cashMoney, stocksValue, allProfit, yesterdayProfit;
-    TextView allMoneyPersian, cashMoneyPersian, stocksValuePersian, allProfitPersian, yesterdayProfitPersian, positivePersian, negativePersian;
-    Button goToStockListPage;
-    ListView positiveList, negativeList;
-    ConnectionManager connectionManager;
-    HomePageInfo homePageInfo;
-    Typeface typefaceBtitr, typefaceBnazanin;
+    private TextView allMoney, cashMoney, stocksValue,
+            allProfit, yesterdayProfit, allMoneyPersian,
+            cashMoneyPersian, stocksValuePersian, allProfitPersian,
+            yesterdayProfitPersian, positivePersian, negativePersian;
+    private Button goToStockListPage;
+    private ListView positiveList, negativeList;
+    private ConnectionManager connectionManager;
+    private HomePageInfo homePageInfo;
+    private Typeface typefaceBtitr, typefaceBnazanin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +42,6 @@ public class HomePage extends AppCompatActivity {
         homePageInfo = new HomePageInfo();
 
         connectionManager = new ConnectionManager();
-        connectionManager.requestHomePageInfo();
 
         connectionManager.setHomePageDataListener(new HomePageDataListener() {
             @Override
@@ -50,6 +51,8 @@ public class HomePage extends AppCompatActivity {
                 refresh();
             }
         });
+        connectionManager.requestHomePageInfo();
+
 
         Toast.makeText(this, R.string.wait_for_response, Toast.LENGTH_SHORT).show();
 
@@ -79,7 +82,6 @@ public class HomePage extends AppCompatActivity {
         negativePersian.setTypeface(typefaceBnazanin);
 
         goToStockListPage = (Button) findViewById(R.id.Button_homePage_goToStockListPage);
-
 
 
         positiveList = (ListView) findViewById(R.id.listView_homePage_positive_stocks);

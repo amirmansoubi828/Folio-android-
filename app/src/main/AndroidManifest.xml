@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity
-            android:name=".Page.LoginPage"
+            android:name=".Page.ProfilePage"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,7 +28,7 @@
             android:name=".Page.VideoPlayerPage"
             android:screenOrientation="landscape" />
         <activity android:name=".Page.HomePage" />
-        <activity android:name=".Page.ProfilePage" />
+        <activity android:name=".Page.LoginPage" />
     </application>
 
 </manifest>

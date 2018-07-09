@@ -13,14 +13,13 @@ import android.view.View;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
-import a4.folio.DataType.PersonalCapital;
-import a4.folio.Listeners.BourseInfoDateListener;
 import a4.folio.ConnectionManager;
+import a4.folio.DataType.PersonalCapital;
 import a4.folio.DataType.Stock;
+import a4.folio.Listeners.BourseInfoDateListener;
 import a4.folio.PageInfo.StockPageInfo;
 import a4.folio.R;
 
@@ -29,21 +28,23 @@ import a4.folio.R;
  */
 
 public class StockListPage extends AppCompatActivity {
-    LinearLayout nameKamel, mojoodi, name, hajm, arzesh, dafmoa, bish, kam, meghpa, taghpa, darpa, meghakh, taghakh, darakh, rooz, tasir, pe, eps, beharz, behtagh;
-    int turn = 1;
-    Typeface typefaceBTitr;
-    static int cashMoney, allMoney;
-    HorizontalScrollView scrollView;
-    ProgressDialog dialog;
-    ConnectionManager connectionManager;
-    List<Stock> bourseInformation;
-    Bundle bundle;
+    private LinearLayout nameKamel, mojoodi, name, hajm,
+            arzesh, dafmoa, bish, kam, meghpa, taghpa,
+            darpa, meghakh, taghakh, darakh, rooz, tasir,
+            pe, eps, beharz, behtagh;
+    private int turn = 1;
+    private Typeface typefaceBTitr;
+    private static int cashMoney, allMoney;
+    private HorizontalScrollView scrollView;
+    private ProgressDialog dialog;
+    private ConnectionManager connectionManager;
+    private List<Stock> bourseInformation;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        bundle = savedInstanceState;
         setContentView(R.layout.stock_list_page);
+
         connectionManager = new ConnectionManager();
 
         dialog = new ProgressDialog(this); // this = YourActivity
@@ -52,10 +53,10 @@ public class StockListPage extends AppCompatActivity {
         dialog.setIndeterminate(true);
         dialog.setCanceledOnTouchOutside(false);
         dialog.show();
-        Toast.makeText(this, R.string.wait, Toast.LENGTH_SHORT).show();
+
         typefaceBTitr = Typeface.createFromAsset(getApplicationContext().getAssets(), "BTitr.ttf");
+
         mojoodi = (LinearLayout) findViewById(R.id.mojoodi_layout);
-        //stockListPage = (LinearLayout) findViewById(R.id.stockListPage_linearLayout);
         name = (LinearLayout) findViewById(R.id.name_layout);
         nameKamel = (LinearLayout) findViewById(R.id.nameKamel_layout);
         hajm = (LinearLayout) findViewById(R.id.hajm_layout);
@@ -181,6 +182,11 @@ public class StockListPage extends AppCompatActivity {
         }
     }
 
-    
+    public static int getCashMoney() {
+        return cashMoney;
+    }
 
+    public static void setCashMoney(int cashMoney) {
+        StockListPage.cashMoney = cashMoney;
+    }
 }
