@@ -32,6 +32,7 @@
             android:layout_marginRight="5dp"
             android:gravity="right"
             android:text="TextView"
+            android:textAlignment="viewStart"
             android:textColor="@android:color/holo_blue_dark"
             android:textSize="18sp" />
 

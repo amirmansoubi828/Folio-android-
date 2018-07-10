@@ -54,9 +54,9 @@ public class MoviesAdapter extends BaseAdapter {
         TextView length = (TextView) view.findViewById(R.id.moviesListPage_textView_length);
 
         title.setText(moviesList.get(position).getName());
-        date.setText(moviesList.get(position).getDate());
+        date.setText(moviesList.get(position).getDate().replace("-","/"));
         detail.setText(moviesList.get(position).getDetail());
-        length.setText(moviesList.get(position).getLength() + "دقیقه" + moviesList.get(position).getSize() + "بایت");
+        length.setText(moviesList.get(position).getLength());
 
         date.setTypeface(bTitr);
         title.setTypeface(bNazanin);

@@ -33,6 +33,7 @@ public class HomePage extends AppCompatActivity {
     private ConnectionManager connectionManager;
     private HomePageInfo homePageInfo;
     private Typeface typefaceBtitr, typefaceBnazanin;
+    private PersonalCapitalAdapter pAdapter , nAdapter ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +52,8 @@ public class HomePage extends AppCompatActivity {
                 refresh();
             }
         });
-        connectionManager.requestHomePageInfo();
+        positiveList = (ListView) findViewById(R.id.listView_homePage_positive_stocks);
+        negativeList = (ListView) findViewById(R.id.listView_homePage_negative_stocks);
 
 
         Toast.makeText(this, R.string.wait_for_response, Toast.LENGTH_SHORT).show();
@@ -84,8 +86,6 @@ public class HomePage extends AppCompatActivity {
         goToStockListPage = (Button) findViewById(R.id.Button_homePage_goToStockListPage);
 
 
-        positiveList = (ListView) findViewById(R.id.listView_homePage_positive_stocks);
-        negativeList = (ListView) findViewById(R.id.listView_homePage_negative_stocks);
         allMoney.setTypeface(typefaceBtitr);
         cashMoney.setTypeface(typefaceBtitr);
         stocksValue.setTypeface(typefaceBtitr);
@@ -109,6 +109,7 @@ public class HomePage extends AppCompatActivity {
     }
 
     void refresh() {
+
         allMoney.setText(String.valueOf(homePageInfo.getAllMoney()));
         cashMoney.setText(String.valueOf(homePageInfo.getCashMoney()));
         stocksValue.setText(String.valueOf(homePageInfo.getStocksValue()));
@@ -118,8 +119,15 @@ public class HomePage extends AppCompatActivity {
         allMoney.setText(String.valueOf(homePageInfo.getAllMoney()));
         allProfit.setText(String.valueOf(homePageInfo.getAllProfit()));
         yesterdayProfit.setText(String.valueOf(homePageInfo.getYesterdayProfit()));
-        positiveList.setAdapter(new PersonalCapitalAdapter(getApplicationContext(), homePageInfo.getPositives(), true));
-        negativeList.setAdapter(new PersonalCapitalAdapter(getApplicationContext(), homePageInfo.getNegatives(), false));
+        pAdapter = new PersonalCapitalAdapter(getApplicationContext(), homePageInfo.getPositives(), true);
+        positiveList.setAdapter(pAdapter);
+        nAdapter = new PersonalCapitalAdapter(getApplicationContext(), homePageInfo.getNegatives(), false);
+        negativeList.setAdapter(nAdapter);
+
+        pAdapter.notifyDataSetChanged();
+        nAdapter.notifyDataSetChanged();
+
+
         positiveList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -144,6 +152,7 @@ public class HomePage extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
     }
 
 
@@ -152,6 +161,5 @@ public class HomePage extends AppCompatActivity {
         super.onResume();
         connectionManager.requestHomePageInfo();
     }
-
 
 }
