@@ -26,13 +26,14 @@ public class HomePageInfo {
             PersonalCapital p = personalCapitals.get(i);
             Stock s = p.getBourse();
             s.setMojoodi(p.getNumber_of_stocks_person_has());
-            if (s.getLastest_Change().equals(null)){
-                continue;
-            }
-            if (Integer.valueOf(s.getLastest_Change()) >= 0) {
-                positives.add(s);
-            } else {
-                negatives.add(s);
+            try {
+                if (Integer.valueOf(s.getLastest_Change()) >= 0) {
+                    positives.add(s);
+                } else {
+                    negatives.add(s);
+                }
+            } catch (NumberFormatException nFE) {
+                nFE.printStackTrace();
             }
         }
         calculateStocksValue();

@@ -40,6 +40,7 @@ public class StockListPage extends AppCompatActivity {
     private ConnectionManager connectionManager;
     private List<Stock> bourseInformation;
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,21 +95,23 @@ public class StockListPage extends AppCompatActivity {
                         }
                     }
                 }
-                refresh();
+                makeTable();
             }
         });
         connectionManager.requestStockListPageInfo();
 
     }
 
-    private void refresh() {
+    private void makeTable() {
         for (Stock s : bourseInformation) {
             addStockToList(s);
+
         }
         scrollView.fullScroll(View.FOCUS_RIGHT);
         dialog.dismiss();
 
     }
+
 
     private void addStockToList(final Stock stock) {
         turn *= -1;
@@ -130,6 +133,8 @@ public class StockListPage extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+
         name.addView(t);
         mojoodi.addView(createTextView(stock.getMojoodi()));
         nameKamel.addView(createTextView(stock.getName()));
@@ -174,11 +179,17 @@ public class StockListPage extends AppCompatActivity {
         return textView;
     }
 
+
     private int chooseColor(String text) {
-        if (Integer.valueOf(text.replaceAll(",", "")) < 0) {
-            return Color.RED;
-        } else {
-            return Color.GREEN;
+        try {
+            if (Integer.valueOf(text.replaceAll(",", "")) < 0) {
+                return Color.RED;
+            } else {
+                return Color.GREEN;
+            }
+        } catch (NumberFormatException nFE) {
+            nFE.printStackTrace();
+            return Color.BLUE;
         }
     }
 
@@ -189,4 +200,5 @@ public class StockListPage extends AppCompatActivity {
     public static void setCashMoney(int cashMoney) {
         StockListPage.cashMoney = cashMoney;
     }
+
 }

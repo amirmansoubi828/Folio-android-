@@ -124,8 +124,7 @@ public class HomePage extends AppCompatActivity {
         nAdapter = new PersonalCapitalAdapter(getApplicationContext(), homePageInfo.getNegatives(), false);
         negativeList.setAdapter(nAdapter);
 
-        pAdapter.notifyDataSetChanged();
-        nAdapter.notifyDataSetChanged();
+
 
 
         positiveList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -152,6 +151,9 @@ public class HomePage extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        pAdapter.notifyDataSetChanged();
+        nAdapter.notifyDataSetChanged();
 
     }
 
