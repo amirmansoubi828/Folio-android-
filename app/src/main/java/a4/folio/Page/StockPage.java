@@ -68,10 +68,13 @@ public class StockPage extends AppCompatActivity {
         tasirDarShakhes = (TextView) findViewById(R.id.textView_StockPage_TasirDarShakhes);
         pe = (TextView) findViewById(R.id.textView_StockPage_PE);
         eps = (TextView) findViewById(R.id.textView_StockPage_EPS);
+
         gheymatKharid = (TextView) findViewById(R.id.textView_StockPage_PriceOfBuy);
         gheymatForoush = (TextView) findViewById(R.id.textView_StockPage_PriceOfCell);
+
         yesterday = (TextView) findViewById(R.id.textView_StockPage_RoozeGhabl);
         arzeshMoamelat = (TextView) findViewById(R.id.textView_StockPage_ArzeshMoa);
+
         tedadKharid = (EditText) findViewById(R.id.editText_StockPage_numberOfBuy);
         tedadForoush = (EditText) findViewById(R.id.editText_StockPage_numberOfcell);
         kharid = (Button) findViewById(R.id.Button_StockPage_buy);

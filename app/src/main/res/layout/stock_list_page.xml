@@ -1,492 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/stockListPage_linearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/secondBackground"
-    android:orientation="horizontal"
-    android:weightSum="1">
+    android:orientation="vertical"
+    android:weightSum="10">
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp">
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@color/mainBackground"
+        android:orientation="horizontal"
+        android:weightSum="6">
 
-        <LinearLayout
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="10">
+            android:layout_height="match_parent"
+            android:layout_marginBottom="1dp"
+            android:layout_marginRight="1dp"
+            android:layout_weight="1.015"
+            android:background="@color/secondBackground"
+            android:gravity="center"
+            android:text="دفعات معامله"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="14sp"
+            android:textStyle="bold" />
 
-            <HorizontalScrollView
-                android:id="@+id/ScrollView_stockListPage"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1.8">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="1dp"
+            android:layout_marginRight="1dp"
+            android:layout_weight="1.015"
+            android:background="@color/secondBackground"
+            android:gravity="center"
+            android:text="درصد\nآخرین"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="14sp"
+            android:textStyle="bold" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/colorPrimaryDark"
-                    android:orientation="horizontal">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="1dp"
+            android:layout_marginRight="1dp"
+            android:layout_weight="1.015"
+            android:background="@color/secondBackground"
+            android:gravity="center"
+            android:text="تغییر\nآخرین"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="14sp"
+            android:textStyle="bold" />
 
-                    <LinearLayout
-                        android:id="@+id/behtagh_layout"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:background="@color/secondBackground"
-                        android:orientation="vertical"
-                        android:padding="1dp"
-                        android:weightSum="10">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="1dp"
+            android:layout_marginRight="1dp"
+            android:layout_weight="1.015"
+            android:background="@color/secondBackground"
+            android:gravity="center"
+            android:text="مقدار\nآخرین"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="14sp"
+            android:textStyle="bold" />
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="5dp"
-                            android:layout_marginLeft="2dp"
-                            android:layout_marginRight="2dp"
-                            android:background="@color/font2"
-                            android:gravity="center"
-                            android:text="بهترین تقاضا"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="18sp"
-                            tools:ignore="DuplicateIds" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="1dp"
+            android:layout_marginRight="1dp"
+            android:layout_weight="1.015"
+            android:background="@color/secondBackground"
+            android:gravity="center"
+            android:text="موجودی"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="14sp"
+            android:textStyle="bold" />
 
-                    </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="1dp"
+            android:layout_marginRight="1dp"
+            android:layout_weight="0.9"
+            android:background="@color/secondBackground"
+            android:gravity="center"
+            android:text="نماد"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+    </LinearLayout>
 
-                    <LinearLayout
-                        android:id="@+id/beharz_layout"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:background="@color/secondBackground"
-                        android:orientation="vertical"
-                        android:padding="1dp"
-                        android:weightSum="10">
+    <ExpandableListView
+        android:id="@+id/stockListPage_listView"
+        style="@android:style/Widget.DeviceDefault.Light.ExpandableListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="9"
+        android:addStatesFromChildren="false"
+        android:animationCache="false"
+        android:background="@color/secondBackground"
+        android:cacheColorHint="@color/colorPrimaryDark"
+        android:clipChildren="false"
+        android:divider="@color/mainBackground"
+        android:dividerHeight="1dp"
+        android:footerDividersEnabled="true"
+        android:groupIndicator="@android:color/transparent"
+        android:headerDividersEnabled="true" />
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="5dp"
-                            android:layout_marginLeft="2dp"
-                            android:layout_marginRight="2dp"
-                            android:background="@color/font2"
-                            android:gravity="center"
-                            android:text="بهترین عرضه"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="18sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/eps_layout"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:background="@color/secondBackground"
-                        android:orientation="vertical"
-                        android:padding="1dp"
-                        android:weightSum="10">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="5dp"
-                            android:layout_marginLeft="2dp"
-                            android:layout_marginRight="2dp"
-                            android:background="@color/font2"
-                            android:gravity="center"
-                            android:text="eps"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="18sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/pe_layout"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:background="@color/secondBackground"
-                        android:orientation="vertical"
-                        android:padding="1dp"
-                        android:weightSum="10">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="5dp"
-                            android:layout_marginLeft="2dp"
-                            android:layout_marginRight="2dp"
-                            android:background="@color/font2"
-                            android:gravity="center"
-                            android:text="pe"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="18sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/tasir_layout"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:background="@color/secondBackground"
-                        android:orientation="vertical"
-                        android:padding="1dp"
-                        android:weightSum="10">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="5dp"
-                            android:layout_marginLeft="2dp"
-                            android:layout_marginRight="2dp"
-                            android:background="@color/font2"
-                            android:gravity="center"
-                            android:text="تاثیر در شاخص"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="18sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/rooz_layout"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:background="@color/secondBackground"
-                        android:orientation="vertical"
-                        android:padding="1dp"
-                        android:weightSum="10">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="5dp"
-                            android:layout_marginLeft="2dp"
-                            android:layout_marginRight="2dp"
-                            android:background="@color/font2"
-                            android:gravity="center"
-                            android:text="روز قبل"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="18sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/darsadakh_layout"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:background="@color/secondBackground"
-                        android:orientation="vertical"
-                        android:padding="1dp"
-                        android:weightSum="10">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="5dp"
-                            android:layout_marginLeft="2dp"
-                            android:layout_marginRight="2dp"
-                            android:background="@color/font2"
-                            android:gravity="center"
-                            android:text="درصد آخرین"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="18sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/taghakh_layout"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:background="@color/secondBackground"
-                        android:orientation="vertical"
-                        android:padding="1dp"
-                        android:weightSum="10">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="5dp"
-                            android:layout_marginLeft="2dp"
-                            android:layout_marginRight="2dp"
-                            android:background="@color/font2"
-                            android:gravity="center"
-                            android:text="تغییر آخرین"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="18sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/meghdarakh_layout"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:background="@color/secondBackground"
-                        android:orientation="vertical"
-                        android:padding="1dp"
-                        android:weightSum="10">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="5dp"
-                            android:layout_marginLeft="2dp"
-                            android:layout_marginRight="2dp"
-                            android:background="@color/font2"
-                            android:gravity="center"
-                            android:text="مقدار آخرین"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="18sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/darsdpa_layout"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:background="@color/secondBackground"
-                        android:orientation="vertical"
-                        android:padding="1dp"
-                        android:weightSum="10">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="5dp"
-                            android:layout_marginLeft="2dp"
-                            android:layout_marginRight="2dp"
-                            android:background="@color/font2"
-                            android:gravity="center"
-                            android:text="درصد پایانی"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="18sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/taghipa_layout"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:background="@color/secondBackground"
-                        android:orientation="vertical"
-                        android:padding="1dp"
-                        android:weightSum="10">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="5dp"
-                            android:layout_marginLeft="2dp"
-                            android:layout_marginRight="2dp"
-                            android:background="@color/font2"
-                            android:gravity="center"
-                            android:text="تغییر پایانی"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="18sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/meghpa_layout"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:background="@color/secondBackground"
-                        android:orientation="vertical"
-                        android:padding="1dp"
-                        android:weightSum="10">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="5dp"
-                            android:layout_marginLeft="2dp"
-                            android:layout_marginRight="2dp"
-                            android:background="@color/font2"
-                            android:gravity="center"
-                            android:text="مقدار پایانی"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="18sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/kam_layout"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:background="@color/secondBackground"
-                        android:orientation="vertical"
-                        android:padding="1dp"
-                        android:weightSum="10">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="5dp"
-                            android:layout_marginLeft="2dp"
-                            android:layout_marginRight="2dp"
-                            android:background="@color/font2"
-                            android:gravity="center"
-                            android:text="کمترین"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="18sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/bish_layout"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:background="@color/secondBackground"
-                        android:orientation="vertical"
-                        android:padding="1dp"
-                        android:weightSum="10">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="5dp"
-                            android:layout_marginLeft="2dp"
-                            android:layout_marginRight="2dp"
-                            android:background="@color/font2"
-                            android:gravity="center"
-                            android:text="بیشترین"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="18sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/dafmoa_layout"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:background="@color/secondBackground"
-                        android:orientation="vertical"
-                        android:padding="1dp"
-                        android:weightSum="10">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="5dp"
-                            android:layout_marginLeft="2dp"
-                            android:layout_marginRight="2dp"
-                            android:background="@color/font2"
-                            android:gravity="center"
-                            android:text="دفعات معامله"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="18sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/arzesh_layout"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:background="@color/secondBackground"
-                        android:orientation="vertical"
-                        android:padding="1dp"
-                        android:weightSum="10">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="5dp"
-                            android:layout_marginLeft="2dp"
-                            android:layout_marginRight="2dp"
-                            android:background="@color/font2"
-                            android:gravity="center"
-                            android:text="ارزش"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="18sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/hajm_layout"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:background="@color/secondBackground"
-                        android:orientation="vertical"
-                        android:padding="1dp"
-                        android:weightSum="10">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="5dp"
-                            android:layout_marginLeft="2dp"
-                            android:layout_marginRight="2dp"
-                            android:background="@color/font2"
-                            android:gravity="center"
-                            android:text="حجم"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="18sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/nameKamel_layout"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:background="@color/secondBackground"
-                        android:orientation="vertical"
-                        android:padding="1dp"
-                        android:weightSum="10">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="5dp"
-                            android:layout_marginLeft="2dp"
-                            android:layout_marginRight="2dp"
-                            android:background="@color/font2"
-                            android:gravity="center"
-                            android:text="نام کامل"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="18sp" />
-                    </LinearLayout>
-
-                </LinearLayout>
-            </HorizontalScrollView>
-
-            <LinearLayout
-                android:id="@+id/mojoodi_layout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="1dp"
-                android:layout_marginRight="1dp"
-                android:layout_weight="4.1"
-                android:background="@color/secondBackground"
-                android:orientation="vertical"
-                android:padding="1dp"
-                android:weightSum="10">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginLeft="2dp"
-                    android:layout_marginRight="2dp"
-                    android:background="@color/font2"
-                    android:gravity="center"
-                    android:text="موجودی"
-                    android:textAlignment="center"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="18sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/name_layout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="1dp"
-                android:layout_marginRight="1dp"
-                android:layout_weight="4.1"
-                android:background="@color/secondBackground"
-                android:orientation="vertical"
-                android:padding="1dp"
-                android:weightSum="10">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginLeft="2dp"
-                    android:layout_marginRight="2dp"
-                    android:background="@color/font2"
-                    android:gravity="center"
-                    android:text="نماد"
-                    android:textAlignment="center"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="18sp" />
-
-            </LinearLayout>
-        </LinearLayout>
-    </ScrollView>
-
-</android.support.design.widget.CoordinatorLayout>
+</LinearLayout>
