@@ -14,6 +14,8 @@ import java.util.List;
 import a4.folio.DataType.Stock;
 import a4.folio.R;
 
+import static android.content.ContentValues.TAG;
+
 public class StockListExpandableListViewAdapter extends BaseExpandableListAdapter {
     private List<Stock> stocks;
     private LayoutInflater layoutInflater;
@@ -63,39 +65,53 @@ public class StockListExpandableListViewAdapter extends BaseExpandableListAdapte
 
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View view, ViewGroup parent) {
-        view = layoutInflater.inflate(R.layout.stock_list_page_list_view_cell_group, null);
 
-        TextView name = (TextView) view.findViewById(R.id.stockListPage_cell_group_textView_symbol);
-        TextView mojoodi = (TextView) view.findViewById(R.id.stockListPage_cell_group_textView_mojoodi);
-        TextView count = (TextView) view.findViewById(R.id.stockListPage_cell_group_textView_count);
-        TextView amount = (TextView) view.findViewById(R.id.stockListPage_cell_group_textView_amount);
-        TextView change = (TextView) view.findViewById(R.id.stockListPage_cell_group_textView_change);
-        TextView percentage = (TextView) view.findViewById(R.id.stockListPage_cell_group_textView_percent);
+        ViewHolder viewHolder;
 
-        name.setText(stocks.get(groupPosition).getNamad());
-        mojoodi.setText(String.valueOf(stocks.get(groupPosition).getMojoodi()));
-        count.setText(stocks.get(groupPosition).getCount_Of_Transaction());
-        amount.setText(stocks.get(groupPosition).getLastest_Amount());
-        change.setText(stocks.get(groupPosition).getLastest_Change());
-        percentage.setText(stocks.get(groupPosition).getLastest_Percentage());
+        if (view == null) {
 
-        Stock stock = stocks.get(groupPosition);
-        amount.setTextColor(chooseColor(stock.getLastest_Change()));
-        change.setTextColor(chooseColor(stock.getLastest_Change()));
-        percentage.setTextColor(chooseColor(stock.getLastest_Change()));
+            view = layoutInflater.inflate(R.layout.stock_list_page_list_view_cell_group, null);
+            viewHolder = new ViewHolder();
+            viewHolder.name = (TextView) view.findViewById(R.id.stockListPage_cell_group_textView_symbol);
+            viewHolder.mojoodi = (TextView) view.findViewById(R.id.stockListPage_cell_group_textView_mojoodi);
+            viewHolder.count = (TextView) view.findViewById(R.id.stockListPage_cell_group_textView_count);
+            viewHolder.amount = (TextView) view.findViewById(R.id.stockListPage_cell_group_textView_amount);
+            viewHolder.change = (TextView) view.findViewById(R.id.stockListPage_cell_group_textView_change);
+            viewHolder.percentage = (TextView) view.findViewById(R.id.stockListPage_cell_group_textView_percent);
 
-        if (stock.getMojoodi() > 0) {
-            name.setTextColor(Color.BLUE);
+            viewHolder.name.setTypeface(typeface);
+            viewHolder.mojoodi.setTypeface(typeface);
+            viewHolder.count.setTypeface(typeface);
+            viewHolder.amount.setTypeface(typeface);
+            viewHolder.change.setTypeface(typeface);
+            viewHolder.percentage.setTypeface(typeface);
+
+            view.setTag(viewHolder);
+
         } else {
-            mojoodi.setText("");
+
+            viewHolder = (ViewHolder) view.getTag();
+
         }
 
-        name.setTypeface(typeface);
-        mojoodi.setTypeface(typeface);
-        count.setTypeface(typeface);
-        amount.setTypeface(typeface);
-        change.setTypeface(typeface);
-        percentage.setTypeface(typeface);
+        viewHolder.name.setText(stocks.get(groupPosition).getNamad());
+        viewHolder.mojoodi.setText(String.valueOf(stocks.get(groupPosition).getMojoodi()));
+        viewHolder.count.setText(stocks.get(groupPosition).getCount_Of_Transaction());
+        viewHolder.amount.setText(stocks.get(groupPosition).getLastest_Amount());
+        viewHolder.change.setText(stocks.get(groupPosition).getLastest_Change());
+        viewHolder.percentage.setText(stocks.get(groupPosition).getLastest_Percentage());
+
+        Stock stock = stocks.get(groupPosition);
+        viewHolder.amount.setTextColor(chooseColor(stock.getLastest_Change()));
+        viewHolder.change.setTextColor(chooseColor(stock.getLastest_Change()));
+        viewHolder.percentage.setTextColor(chooseColor(stock.getLastest_Change()));
+
+        if (stock.getMojoodi() > 0) {
+            viewHolder.name.setTextColor(Color.BLUE);
+        } else {
+            viewHolder.name.setTextColor(Color.rgb(62, 30, 20));
+            viewHolder.mojoodi.setText("");
+        }
 
 
         return view;
