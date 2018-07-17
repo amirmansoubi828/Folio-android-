@@ -54,7 +54,6 @@ public class StockListPage extends AppCompatActivity {
         dialog.setMessage("در حال دریافت اطلاعات\nصبر کنید ...");
         dialog.setIndeterminate(true);
         dialog.setCanceledOnTouchOutside(false);
-        dialog.show();
 
         typefaceBTitr = Typeface.createFromAsset(getApplicationContext().getAssets(), "BTitr.ttf");
 
@@ -79,7 +78,6 @@ public class StockListPage extends AppCompatActivity {
                 dialog.dismiss();
             }
         });
-        connectionManager.requestStockListPageInfo();
 
 
 
@@ -94,4 +92,10 @@ public class StockListPage extends AppCompatActivity {
         StockListPage.cashMoney = cashMoney;
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        connectionManager.requestStockListPageInfo();
+        dialog.show();
+    }
 }

@@ -1,30 +1,36 @@
 package a4.folio.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.List;
 
 import a4.folio.DataType.Stock;
+import a4.folio.Page.StockListPage;
+import a4.folio.Page.StockPage;
+import a4.folio.PageInfo.StockPageInfo;
 import a4.folio.R;
 
-import static android.content.ContentValues.TAG;
 
 public class StockListExpandableListViewAdapter extends BaseExpandableListAdapter {
     private List<Stock> stocks;
     private LayoutInflater layoutInflater;
     private Typeface typeface;
+    private Context context;
 
     public StockListExpandableListViewAdapter(List<Stock> stocks, Context context) {
         this.stocks = stocks;
         this.layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         typeface = Typeface.createFromAsset(context.getAssets(), "BTitr.ttf");
+        this.context = context;
 
     }
 
@@ -118,11 +124,13 @@ public class StockListExpandableListViewAdapter extends BaseExpandableListAdapte
     }
 
     @Override
-    public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View view, ViewGroup parent) {
+    public View getChildView(final int groupPosition, int childPosition, boolean isLastChild, View view, ViewGroup parent) {
         view = layoutInflater.inflate(R.layout.stock_list_page_list_view_cell_child, null);
-        Stock stock = stocks.get(groupPosition);
+        final Stock stock = stocks.get(groupPosition);
 
         TextView gheymatPayani, taghirPayani, darsadPayani, bishtarin, kamtarin, hajmMoamelat, yesterday, arzeshMoamelat, tasirDarShakhes, pe, eps;
+        Button goToStockPage;
+
         gheymatPayani = (TextView) view.findViewById(R.id.textView_StockPage_PayaniGheymat);
         taghirPayani = (TextView) view.findViewById(R.id.textView_StockPage_PayaniSood);
         darsadPayani = (TextView) view.findViewById(R.id.textView_StockPage_PayaniDarsad);
@@ -134,6 +142,8 @@ public class StockListExpandableListViewAdapter extends BaseExpandableListAdapte
         eps = (TextView) view.findViewById(R.id.textView_StockPage_EPS);
         yesterday = (TextView) view.findViewById(R.id.textView_StockPage_RoozeGhabl);
         arzeshMoamelat = (TextView) view.findViewById(R.id.textView_StockPage_ArzeshMoa);
+
+        goToStockPage = (Button) view.findViewById(R.id.goToStockPage_StockListPage_child_Button);
 
         gheymatPayani.setText(stock.getFinal_Amount());
         darsadPayani.setText("(" + stock.getFinal_Persentage() + "%)");
@@ -161,6 +171,19 @@ public class StockListExpandableListViewAdapter extends BaseExpandableListAdapte
         eps.setTypeface(typeface);
         tasirDarShakhes.setTypeface(typeface);
         hajmMoamelat.setTypeface(typeface);
+
+        goToStockPage.setTypeface(typeface);
+        goToStockPage.setText(goToStockPage.getText().toString().replace("؟", stock.getNamad()));
+
+        goToStockPage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, StockPage.class);
+                StockPageInfo stockPageInfo = new StockPageInfo(stocks.get(groupPosition), StockListPage.getCashMoney(), 0);
+                intent.putExtra("stockPI", stockPageInfo);
+                context.startActivity(intent);
+            }
+        });
 
 
         return view;

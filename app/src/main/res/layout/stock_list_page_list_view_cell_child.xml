@@ -7,7 +7,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
         android:layout_marginTop="1dp"
         android:orientation="vertical">
 
@@ -377,7 +376,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="1dp"
             android:background="@color/secondBackground"
             android:gravity="right"
             android:orientation="horizontal">
@@ -476,5 +474,17 @@
             </LinearLayout>
 
         </LinearLayout>
+
+        <Button
+            android:id="@+id/goToStockPage_StockListPage_child_Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@color/font2"
+            android:padding="10dp"
+            android:text="خرید یا فروش ؟"
+            android:textColor="@color/secondBackground"
+            android:textSize="18sp"
+            android:textStyle="bold" />
     </LinearLayout>
 </LinearLayout>
