@@ -15,7 +15,7 @@
         android:layout_height="match_parent"
         android:layout_weight="3.33"
         android:background="@color/mainBackground"
-        android:padding="130dp"
+        android:padding="110dp"
         app:srcCompat="@mipmap/olio" />
 
 </LinearLayout>

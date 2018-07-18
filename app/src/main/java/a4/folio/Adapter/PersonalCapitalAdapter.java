@@ -65,7 +65,7 @@ public class PersonalCapitalAdapter extends BaseAdapter {
 
 
         namad.setText(stocks.get(position).getNamad());
-        mojoodi.setText(String.valueOf(stocks.get(position).getMojoodi()));
+        mojoodi.setText(String.valueOf(stocks.get(position).getMojoodi()) + "  سهم");
         ghey.setText(stocks.get(position).getLastest_Amount());
         tagh.setText(stocks.get(position).getLastest_Change());
         darsad.setText(stocks.get(position).getLastest_Percentage() + "%");

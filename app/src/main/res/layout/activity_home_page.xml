@@ -11,10 +11,11 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="1dp"
         android:layout_marginLeft="6dp"
         android:layout_marginRight="6dp"
-        android:layout_marginTop="2dp"
-        android:background="@color/font2"
+        android:layout_marginTop="6dp"
+        android:background="@color/colorPrimaryDark"
         android:orientation="horizontal"
         android:paddingBottom="3dp"
         android:paddingTop="3dp">
@@ -27,7 +28,7 @@
             android:layout_weight="1"
             android:fontFamily="monospace"
             android:gravity="center"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@color/secondBackground"
             android:textSize="18sp" />
 
         <TextView
@@ -39,16 +40,17 @@
             android:fontFamily="monospace"
             android:gravity="center"
             android:text="کل دارایی شما"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@color/secondBackground"
             android:textSize="18sp" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="1dp"
         android:layout_marginLeft="6dp"
         android:layout_marginRight="6dp"
-        android:background="@color/font2"
+        android:background="@color/colorPrimaryDark"
         android:orientation="horizontal"
         android:paddingBottom="3dp"
         android:paddingTop="3dp">
@@ -61,7 +63,7 @@
             android:layout_weight="1"
             android:fontFamily="monospace"
             android:gravity="center"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@color/secondBackground"
             android:textSize="18sp" />
 
         <TextView
@@ -73,16 +75,17 @@
             android:fontFamily="monospace"
             android:gravity="center"
             android:text="پول نقد شما"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@color/secondBackground"
             android:textSize="18sp" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="1dp"
         android:layout_marginLeft="6dp"
         android:layout_marginRight="6dp"
-        android:background="@color/font2"
+        android:background="@color/colorPrimaryDark"
         android:orientation="horizontal"
         android:paddingBottom="3dp"
         android:paddingTop="3dp">
@@ -95,7 +98,7 @@
             android:layout_weight="1"
             android:fontFamily="monospace"
             android:gravity="center"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@color/secondBackground"
             android:textSize="18sp" />
 
         <TextView
@@ -107,7 +110,7 @@
             android:fontFamily="monospace"
             android:gravity="center"
             android:text="مجموع ارزش سهام شما"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@color/secondBackground"
             android:textSize="18sp" />
     </LinearLayout>
 
@@ -116,7 +119,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="6dp"
         android:layout_marginRight="6dp"
-        android:background="@color/font2"
+        android:background="@color/colorPrimaryDark"
         android:orientation="horizontal"
         android:paddingBottom="3dp"
         android:paddingTop="3dp">
@@ -129,7 +132,7 @@
             android:layout_weight="1"
             android:fontFamily="monospace"
             android:gravity="center"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@color/secondBackground"
             android:textSize="18sp" />
 
         <TextView
@@ -137,12 +140,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginRight="1dp"
             android:layout_weight="1"
             android:fontFamily="monospace"
             android:gravity="center"
             android:paddingRight="10dp"
             android:text="سود نسبت به دیروز"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@color/secondBackground"
             android:textSize="18sp" />
 
         <TextView
@@ -153,7 +157,7 @@
             android:layout_weight="1"
             android:fontFamily="monospace"
             android:gravity="center"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@color/secondBackground"
             android:textSize="18sp" />
 
         <TextView
@@ -165,7 +169,7 @@
             android:fontFamily="monospace"
             android:gravity="center"
             android:text="سود کل"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@color/secondBackground"
             android:textSize="18sp" />
 
     </LinearLayout>
@@ -182,8 +186,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"
-            android:layout_marginLeft="1dp"
-            android:layout_marginRight="1dp"
             android:layout_marginTop="2dp"
             android:layout_weight="1"
             android:background="@color/mainBackground"
@@ -213,10 +215,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="2dp"
-                android:background="@color/font2"
+                android:background="@color/colorPrimaryDark"
                 android:gravity="center"
                 android:padding="5dp"
                 android:text="سهام منفی شما"
+                android:textColor="@color/secondBackground"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -243,10 +246,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="2dp"
-                android:background="@color/font2"
+                android:background="@color/colorPrimaryDark"
                 android:gravity="center"
                 android:padding="5dp"
                 android:text="سهام مثبت شما"
+                android:textColor="@color/secondBackground"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 

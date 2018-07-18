@@ -1,6 +1,7 @@
 package a4.folio.Page;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -11,8 +12,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.dd.processbutton.FlatButton;
-import com.dd.processbutton.ProcessButton;
 import com.dd.processbutton.iml.ActionProcessButton;
 
 import a4.folio.ConnectionManager;
@@ -29,12 +28,16 @@ public class LoginPage extends AppCompatActivity {
     private ActionProcessButton signIn;
     private Button goToSignUp;
     private ConnectionManager connectionManager;
+    private Typeface BNtypeface;
 
     //// FIXME: 7/9/2018
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_page);
+
+        BNtypeface = Typeface.createFromAsset(getApplicationContext().getAssets(), "BNaznnBd.ttf");
+
         username = (EditText) findViewById(R.id.login_username_editText);
         password = (EditText) findViewById(R.id.login_password_editText);
         signIn = (ActionProcessButton) findViewById(R.id.login_signIn_button);
@@ -49,8 +52,8 @@ public class LoginPage extends AppCompatActivity {
                     ConnectionManager.setUsername(username.getText().toString());
                     Intent intent = new Intent(LoginPage.this, ProfilePage.class);
                     startActivity(intent);
-                    //finish();
-                }{
+                    finish();
+                } else {
                     signIn.setProgress(-1);
                 }
                 signIn.setEnabled(true);
@@ -100,6 +103,10 @@ public class LoginPage extends AppCompatActivity {
 
             }
         });
+
+        signIn.setTypeface(BNtypeface);
+        goToSignUp.setTypeface(BNtypeface);
+
 
     }
 }

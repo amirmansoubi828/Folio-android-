@@ -25,7 +25,7 @@
             android:background="@color/font2"
             android:ems="10"
             android:gravity="center"
-            android:hint="Username:"
+            android:hint="نام کاربری : "
             android:inputType="textPersonName"
             android:textColor="@color/font"
             android:textColorHint="@color/colorPrimaryDark"
@@ -49,7 +49,7 @@
             android:background="@color/font2"
             android:ems="10"
             android:gravity="center"
-            android:hint="Password:"
+            android:hint="رمز عبور : "
             android:inputType="textPassword"
             android:textColor="@color/font"
             android:textColorHint="@color/colorPrimaryDark"
@@ -64,14 +64,14 @@
         android:layout_marginRight="20dp"
         android:layout_weight="1"
         android:background="@color/mainBackground"
-        android:text="Sign In"
+        android:text="ورود"
         android:textColor="@color/secondBackground"
         android:textSize="24sp"
         app:pb_colorNormal="@color/mainBackground"
         app:pb_colorProgress="@color/font2"
-        app:pb_textComplete="Successfull"
-        app:pb_textError="ERR"
-        app:pb_textProgress="Wait" />
+        app:pb_textComplete="ورود موفق"
+        app:pb_textError="خطا"
+        app:pb_textProgress="لطفا منتظر بمانید" />
 
     <Button
         android:id="@+id/login_createAccount_button"
@@ -82,7 +82,7 @@
         android:autoText="false"
         android:background="@android:color/transparent"
         android:linksClickable="false"
-        android:text="or Create an account"
+        android:text="ساخت اکانت جدید"
         android:textAllCaps="false"
         android:textColor="@color/font"
         android:textSize="24sp" />

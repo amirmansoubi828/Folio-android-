@@ -1,6 +1,7 @@
 package a4.folio.Page;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -24,16 +25,24 @@ public class ProfilePage extends AppCompatActivity {
     private TextView username;
     private ConnectionManager connectionManager;
     private FloatingActionButton logoutFAB;
+    private Typeface BNtypeface;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_page);
+
         username = (TextView) findViewById(R.id.ProfilePage_textView_username);
         goToHomePage = (Button) findViewById(R.id.ProfilePage_button_goToHomePage);
         goToMovieListPage = (Button) findViewById(R.id.ProfilePage_button_goToMovieListPage);
         goToNewsListPage = (Button) findViewById(R.id.ProfilePage_button_goToNewsListPage);
         logoutFAB = (FloatingActionButton) findViewById(R.id.ProfilePage_FAB);
+
+        BNtypeface = Typeface.createFromAsset(getApplicationContext().getAssets(), "BNaznnBd.ttf");
+
+        goToHomePage.setTypeface(BNtypeface);
+        goToMovieListPage.setTypeface(BNtypeface);
+        goToNewsListPage.setTypeface(BNtypeface);
 
         username.setText(ConnectionManager.getUsername());
 
