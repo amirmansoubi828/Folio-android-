@@ -5,9 +5,9 @@ package a4.folio.DataType;
  */
 
 public class PersonalInfo {
-    String username , name , lastname , password , email , birthday , date , gender ;
-    boolean log_in ;
-    int money;
+    private String username , name , lastName, password , email , birthday , date , gender ;
+    private boolean log_in ;
+    private int money;
 
     public String getUsername() {
         return username;
@@ -25,12 +25,12 @@ public class PersonalInfo {
         this.name = name;
     }
 
-    public String getLastname() {
-        return lastname;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getPassword() {

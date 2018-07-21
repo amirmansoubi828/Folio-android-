@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/secondBackground">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.github.florent37.materialtextfield.MaterialTextField
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="50dp"
+                android:layout_weight="1"
+                app:mtf_backgroundColor="@color/font2"
+                app:mtf_labelColor="@color/colorPrimaryDark">
+
+                <EditText
+                    android:id="@+id/_username_editText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/font2"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:hint="نام کاربری : "
+                    android:inputType="textPersonName"
+                    android:textColor="@color/font"
+                    android:textColorHint="@color/colorPrimaryDark"
+                    android:textColorLink="@color/colorPrimaryDark" />
+            </com.github.florent37.materialtextfield.MaterialTextField>
+
+            <com.github.florent37.materialtextfield.MaterialTextField
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="50dp"
+                android:layout_weight="1"
+                app:mtf_backgroundColor="@color/font2"
+                app:mtf_labelColor="@color/colorPrimaryDark">
+
+                <EditText
+                    android:id="@+id/login_username_editText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/font2"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:hint="رمز عبور :"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/font"
+                    android:textColorHint="@color/colorPrimaryDark"
+                    android:textColorLink="@color/colorPrimaryDark" />
+            </com.github.florent37.materialtextfield.MaterialTextField>
+
+            <com.github.florent37.materialtextfield.MaterialTextField
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="50dp"
+                android:layout_weight="1"
+                app:mtf_backgroundColor="@color/font2"
+                app:mtf_labelColor="@color/colorPrimaryDark">
+
+                <EditText
+                    android:id="@+id/login_username_editText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/font2"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:hint="ایمیل :"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/font"
+                    android:textColorHint="@color/colorPrimaryDark"
+                    android:textColorLink="@color/colorPrimaryDark" />
+
+            </com.github.florent37.materialtextfield.MaterialTextField>
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="50dp"
+                android:layout_weight="1"
+                android:background="@color/mainBackground"
+                android:text="ثبت نام و ورود"
+                android:textColor="@color/secondBackground"
+                android:textSize="24sp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
