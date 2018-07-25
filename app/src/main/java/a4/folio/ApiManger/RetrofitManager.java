@@ -18,6 +18,7 @@ public class RetrofitManager {
 
     private static Retrofit.Builder builder =
             new Retrofit.Builder()
+                    .client(httpClient.build())
                     .baseUrl(BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create());
 
