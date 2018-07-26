@@ -26,7 +26,7 @@
                 app:mtf_labelColor="@color/colorPrimaryDark">
 
                 <EditText
-                    android:id="@+id/_username_editText"
+                    android:id="@+id/createUser_username_editText"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@color/font2"
@@ -51,7 +51,7 @@
                 app:mtf_labelColor="@color/colorPrimaryDark">
 
                 <EditText
-                    android:id="@+id/login_username_editText"
+                    android:id="@+id/createUser_password_editText"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@color/font2"
@@ -76,7 +76,7 @@
                 app:mtf_labelColor="@color/colorPrimaryDark">
 
                 <EditText
-                    android:id="@+id/login_username_editText"
+                    android:id="@+id/createUser_email_editText"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@color/font2"
@@ -91,7 +91,7 @@
             </com.github.florent37.materialtextfield.MaterialTextField>
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/createUser_register_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
